@@ -11,7 +11,7 @@ h1, h2, h3, input, button {
 }
 /* Top colors */
 .top {
-	background: #E5E0C3;	
+	background: #FC4103;	
 	color: #475345;
 }
 .top a {
@@ -21,11 +21,11 @@ h1, h2, h3, input, button {
 	color: #D2392B;
 }
 h1 {
-	color: #D2392B;
+	color: #101241;
 }
 /* Bottom colors */
 body, .bottom {
-	background: #475345;
+	background: #101241;
 	color: #E5E0C3;
 }
 .bottom a {
@@ -94,7 +94,7 @@ h1, #barcode {
 	left: -2em;
 	float: right;
 	display: inline-block;
-	background: #475345;
+	background: #101241;
 }
 .transaction-list .undone {
 	opacity: .5;
@@ -134,7 +134,7 @@ h1, #barcode {
 	display: inline-block;
 	margin: 0 1ex;
 	border-radius: .5ex;
-	background: #D2392B;
+	background: #FC4103;
 	font-family: Verdana, Geneva, sans-serif;
 }
 .minimenu li a {
