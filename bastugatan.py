@@ -204,7 +204,10 @@ def on_release(key):
 user_command_registry : dict[str,Command] = {}
 admin_command_registry : dict[str,Command] = {}
 
-def handle_help(command_registry, args: str, say):
+def handle_help(command_registry : dict[str,Command], args: str, say):
+    """
+    Provide `help` info to the user
+    """
     if len(args) < 1:
         say("The following commands are available:\n" +
             '\n'.join([
