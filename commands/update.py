@@ -41,3 +41,9 @@ class Update(Command):
         except Exception as e:
             print("Error downloading image:", e)
             return False
+        
+    def help(self):
+        return """Uppdaterar din profilbild på streck appen till din nuvarande slack-profilbild"""
+
+    def __str__(self):
+        return "Uppdatera din profilbild"    
