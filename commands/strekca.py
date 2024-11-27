@@ -12,13 +12,13 @@ class Strecka(Command):
         super().__init__()
         self.db = DatabaseHandler()
 
-    def execute(self, user_ids : tuple[str,str], args : str, say):
+    def execute(self, user : dict[str,str], args : str, say):
         price = self.db.get_price(self.product)
         if price <= 0:
             say(f"Hmmm. Något gick fel. Kontakta <@{ADMIN}> om saker inte verkar funka")
             return
         
-        changes = self.db.purchase(user_ids[1], self.product, price)
+        changes = self.db.purchase(user["db_id"], self.product, price)
         
         if not changes:
             say(f"Hmmm. Något gick fel. Kontakta <@{ADMIN}> om saker inte verkar funka")

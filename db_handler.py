@@ -84,13 +84,13 @@ class DatabaseHandler:
         res = self.execute_query(query, (time_span_str,))
         return res or []
     
-    def get_db_id(self, slack_id):
+    def get_user(self, slack_id):
         """
         Gets the users actual database id for identification and interaction with the database
         """
-        query = "SELECT id FROM Users U where slack_id=?"
+        query = "SELECT id, name FROM Users U where slack_id=?"
         res = self.execute_query(query, (slack_id,))
-        return res[0] if res else None
+        return res[0] if res else (None,None)
     
     def purchase(self, db_id, product, price):
         """

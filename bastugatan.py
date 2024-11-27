@@ -228,7 +228,7 @@ def handle_message(event, say, _):
         return # ignore messages not in DM
 
     user_id = event["user"]
-    db_id = db.get_db_id(user_id)
+    db_id, name = db.get_user(user_id)
     user_input = event["text"].strip()
 
     parts = user_input.split(" ", 1)
@@ -255,7 +255,11 @@ def handle_message(event, say, _):
         handle_help(command_registry, args, say)
         return
     if command in command_registry:
-        command_registry[command].execute((user_id,db_id), args, say)
+        command_registry[command].execute({
+            "slack_id": user_id,
+            "db_id": db_id,
+            "name": name
+        }, args, say)
     else:
         say("Fattar inte vad du menar. Kan fixa öl, cider och läsk, annars kan du ju skriva `help` om det behövs")
 

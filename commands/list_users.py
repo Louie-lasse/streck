@@ -7,7 +7,7 @@ class List_Users(Command):
         super().__init__()
         self.db = DatabaseHandler()
 
-    def execute(self, user_ids: tuple[str, str], arg: str, say):
+    def execute(self, _, arg: str, say):
         if len(arg) > 0:
             if not arg.isnumeric() or int(arg) != float(arg):
                 say("Please provide an integer value, or nothing to get the default `10`")

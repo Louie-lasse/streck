@@ -4,7 +4,7 @@ class Command(ABC):
     """Base class for all commands."""
 
     @abstractmethod
-    def execute(self, user_ids : tuple[str,str], args : str, say):
+    def execute(self, user_ids : dict[str,str], args : str, say):
         """
         A custom command to execute for the slack bot
         """
