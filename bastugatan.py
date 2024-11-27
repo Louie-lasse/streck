@@ -12,7 +12,7 @@ from slack import WebClient
 from dotenv import load_dotenv
 
 from db_handler import DatabaseHandler
-from commands import Command
+from commands import Command, Beer
 
 DEV = False
 
@@ -178,6 +178,8 @@ def on_release(key):
 
 user_command_registry : dict[str,Command] = {}
 admin_command_registry : dict[str,Command] = {}
+
+user_command_registry["öl"] = Beer()
 
 def handle_help(command_registry : dict[str,Command], args: str, say):
     """

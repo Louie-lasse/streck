@@ -45,6 +45,29 @@ class DatabaseHandler:
                 print(f"Database error: {e}")
                 return None
 
+    def execute_command(self, command, params=(), commit=True):
+        """
+        Execute a non-SELECT command (INSERT, UPDATE, DELETE) against the database.
+        
+        Args:
+            command (str): The SQL command to execute (INSERT, UPDATE, DELETE, etc.).
+            params (tuple): Parameters to bind to the command.
+            commit (bool): Whether to commit the changes.
+
+        Returns:
+            int: Number of rows affected by the command, or -1 if an error occurred.
+        """
+        with self as db:
+            try:
+                db.cursor.execute(command, params)
+                if commit:
+                    db.conn.commit()
+                return db.cursor.rowcount  # Number of affected rows
+            except sqlite3.Error as e:
+                print(f"Database error: {e}")
+                return -1
+
+
     def _handle_shutdown(self, signum, frame):
         """Handle shutdown signals (e.g., CTRL+C) to close the database connection."""
         print("\nShutting down gracefully...")
@@ -68,3 +91,19 @@ class DatabaseHandler:
         query = "SELECT id FROM Users U where slack_id=?"
         res = self.execute_query(query, (slack_id,))
         return res[0] if res else None
+    
+    def purchase(self, db_id, product, price):
+        """
+        Adds a transaction to a user
+        """
+        query = 'INSERT into transactions values (null, datetime("now", "-1 day"), ?, ?, ?, ?)'
+        res = self.execute_command(query, (db_id, product, price, ''))
+        return 0 if res <= 0 else res
+    
+    def get_price(self, product):
+        """
+        Finds the price of a product 
+        """
+        query = "Select price from products where id = ?"
+        res = self.execute_query(query, (product,))
+        return res or 0
