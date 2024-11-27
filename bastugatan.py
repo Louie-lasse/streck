@@ -1,11 +1,9 @@
-from pynput import keyboard
 import threading
 import time
-import sqlite3
-from datetime import datetime, timedelta
 import random
 import os
-import re
+
+from pynput import keyboard
 
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
@@ -13,6 +11,7 @@ from slack import WebClient
 
 from dotenv import load_dotenv
 
+from db_handler import DatabaseHandler
 from commands import Command
 
 DEV = False
@@ -34,6 +33,8 @@ ADMIN = os.getenv("ADMIN")
 CHANNEL = os.getenv("DEV_CHANNEL") if DEV else os.getenv("DEV_CHANNEL")
 
 keys = {keyboard.Key.ctrl_l, keyboard.Key.f8}
+
+db = DatabaseHandler()
 
 ### GENERAL HELPER FUNCTIONS ###
 
@@ -108,32 +109,6 @@ def get_message(users: list[str]) -> str:
         return random.choice(nullary)([])
     return random.choice(nullary + nary)(users)
 
-def get_users() -> list[str]:
-    """
-    Get recently active users from the database
-    """
-    connection = sqlite3.connect("streck/streck.db")
-    cursor = connection.cursor()
-
-    try:
-        thirty_minutes_ago = datetime.now() - timedelta(minutes=180) # 60 minutes + that sql is one hour behind python
-        # added 60 extra making 180 due to summer time. Temp fix
-        thirty_minutes_ago_str = thirty_minutes_ago.strftime("%Y-%m-%d %H:%M:%S")
-
-        cursor.execute("SELECT name FROM Transactions JOIN Users U on user=U.id WHERE added >= ? GROUP BY name", (thirty_minutes_ago_str,))
-
-        rows = cursor.fetchall()
-
-        return [row[0] for row in rows if row[0] != "djinn"]
-
-    except sqlite3.Error:
-        print("Error fetching data from Users table:")
-        return []
-
-    finally:
-        cursor.close()
-        connection.close()
-
 
 def send_message(message) -> None:
     """
@@ -160,10 +135,10 @@ def trigger_web_hook():
     """
     Function for sending formated list of acive members on slack
     """
-    users = get_users()
-    print(users)
+    users = db.get_recent_users()
     if users == []:
         return
+    
     reset_timer()
     text = get_message(users)
     send_message(text)
@@ -231,7 +206,7 @@ def handle_mention(*_):
     """
     Function to handle when the bot is mentioned @bastugatan
     """
-    users = get_users()
+    users = db.get_recent_users()
     if users == []:
         send_message(block_of(b'Verkar inte va n\xc3\xa5n h\xc3\xa4r, men va fan vet jag'.decode('utf-8')))
     else:
