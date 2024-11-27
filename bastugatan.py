@@ -261,7 +261,7 @@ def handle_message(event, say, _):
     if command in command_registry:
         command_registry[command](user_id, args, say)
     else:
-        say("Fattar inte vad du menar. Kan fixa öl och cider, annars kan du ju skriva `help` om det behövs")
+        say("Fattar inte vad du menar. Kan fixa öl, cider och läsk, annars kan du ju skriva `help` om det behövs")
 
 ############
 
