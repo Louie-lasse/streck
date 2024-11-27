@@ -13,6 +13,8 @@ from slack import WebClient
 
 from dotenv import load_dotenv
 
+from commands import Command
+
 DEV = False
 
 load_dotenv()
@@ -26,7 +28,7 @@ app = App(token=SLACK_BOT_TOKEN)
 LAST_TRIGGER = None
 pressed = set()
 
-admin = os.getenv("ADMIN")
+ADMIN = os.getenv("ADMIN")
 
 
 CHANNEL = os.getenv("DEV_CHANNEL") if DEV else os.getenv("DEV_CHANNEL")
@@ -195,6 +197,28 @@ def on_release(key):
     if key in pressed:
         pressed.remove(key)
 
+#####################
+
+### CLI FUNCTIONS ###
+
+user_command_registry : dict[str,Command] = {}
+admin_command_registry : dict[str,Command] = {}
+
+def handle_help(command_registry, args: str, say):
+    if len(args) < 1:
+        say("The following commands are available:\n" +
+            '\n'.join([
+                str(command) for command in command_registry
+            ])
+        )
+        return
+    target = args.slit(" ", 1)
+
+    if target in command_registry:
+        say(command_registry[target].help())
+    else:
+        say(f"Fattar inte vad du menar med {target}?!\nPröva `help` om du behöver")
+
 ##################################
 
 ### SLACK CONNECTION FUNCTIONS ###
@@ -215,7 +239,29 @@ def handle_mention(*_):
 
 @app.event("message")
 def handle_message(event, say, _):
-    pass
+    """Main function to handle incoming Slack messages."""
+    if event["channel_type"] != "im":
+        return # ignore messages not in DM
+    
+    user_id = event["user"]
+    user_input = event["text"].strip()
+
+    parts = user_input.split(" ", 1)
+    command = parts[0].lower()
+    args = parts[1] if len(parts) > 1 else ""
+
+    command_registry = {
+        **user_command_registry,
+        **(admin_command_registry if user_id == ADMIN else {})
+    }
+
+    if command == "help":
+        handle_help(command_registry, args, say)
+        return
+    if command in command_registry:
+        command_registry[command](user_id, args, say)
+    else:
+        say("Fattar inte vad du menar. Kan fixa öl och cider, annars kan du ju skriva `help` om det behövs")
 
 ############
 
