@@ -107,3 +107,12 @@ class DatabaseHandler:
         query = "Select price from products where id = ?"
         res = self.execute_query(query, (product,))
         return res or 0
+    
+    def list_users(self, n=10):
+        """
+        Returns the `n` most recently added users.
+        Default 10
+        """
+        query = "SELECT id, name FROM Users ORDER BY id DESC LIMIT ?"
+        res = self.execute_command(query, (n,))
+        return reversed(res)
