@@ -12,7 +12,7 @@ from slack import WebClient
 from dotenv import load_dotenv
 
 from db_handler import DatabaseHandler
-from commands import Command, Beer, Cider, Soda, List_Users
+from commands import Command, Beer, Cider, Soda, List_Users, Update
 
 DEV = False
 
@@ -182,6 +182,7 @@ admin_command_registry : dict[str,Command] = {}
 user_command_registry["öl"] = Beer()
 user_command_registry["cider"] = Cider()
 user_command_registry["läsk"] = Soda()
+user_command_registry["update"] = Update(slack_client)
 
 admin_command_registry["list_users"] = List_Users()
 

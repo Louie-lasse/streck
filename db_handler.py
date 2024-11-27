@@ -116,3 +116,11 @@ class DatabaseHandler:
         query = "SELECT id, name FROM Users ORDER BY id DESC LIMIT ?"
         res = self.execute_command(query, (n,))
         return reversed(res)
+    
+    def save_image(self, user, file_name):
+        """
+        Saves a filename to the db under a specified user
+        """
+        query = "UPDATE users SET image = ? WHERE id = ?"
+        res = self.execute_command(query, (user,file_name))
+        return 0 if res <= 0 else res
