@@ -183,23 +183,22 @@ user_command_registry["öl"] = Beer()
 user_command_registry["cider"] = Cider()
 user_command_registry["läsk"] = Soda()
 
-def handle_help(command_registry : dict[str,Command], args: str, say):
+def handle_help(command_registry : dict[str,Command], arg: str, say):
     """
     Provide `help` info to the user
     """
-    if len(args) < 1:
+    if len(arg) < 1:
         say("The following commands are available:\n" +
             '\n'.join([
                 str(command) for command in command_registry
             ])
         )
         return
-    target = args.slit(" ", 1)
 
-    if target in command_registry:
-        say(command_registry[target].help())
+    if arg in command_registry:
+        say(command_registry[arg].help())
     else:
-        say(f"Fattar inte vad du menar med {target}?!\nPröva `help` om du behöver")
+        say(f"Fattar inte vad du menar med {arg}?!\nPröva `help` om du behöver")
 
 ##################################
 
