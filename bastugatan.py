@@ -220,13 +220,25 @@ def handle_message(event, say, _):
     """Main function to handle incoming Slack messages."""
     if event["channel_type"] != "im":
         return # ignore messages not in DM
-    
+
     user_id = event["user"]
+    db_id = db.get_db_id(user_id)
     user_input = event["text"].strip()
 
     parts = user_input.split(" ", 1)
     command = parts[0].lower()
     args = parts[1] if len(parts) > 1 else ""
+
+    if db_id is None:
+        if command == "connect_me":
+            say(f"Gott. Har skickat ett medelande till <@{ADMIN}> och bett dom lägga till dig")
+            say(
+                CHANNEL=ADMIN,
+                text=f"User <@{user_id}> wants to connect to slack. Do so using the `connect` command. Type `help` or `help connect` for more info"
+            )
+        else:
+            say("Du verkar inte vara uppkoplad till slack. För att koppla upp dig, skicka `connect_me`")
+        return
 
     command_registry = {
         **user_command_registry,
@@ -237,7 +249,7 @@ def handle_message(event, say, _):
         handle_help(command_registry, args, say)
         return
     if command in command_registry:
-        command_registry[command](user_id, args, say)
+        command_registry[command].execute((user_id,db_id), args, say)
     else:
         say("Fattar inte vad du menar. Kan fixa öl, cider och läsk, annars kan du ju skriva `help` om det behövs")
 
