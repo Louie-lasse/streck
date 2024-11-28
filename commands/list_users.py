@@ -16,7 +16,10 @@ class List_Users(Command):
         else:
             n = 10
         users = self.db.list_users(n)
-        say('\n'.join(users))
+        say('\n'.join([
+            f"id: {db_id}\t\tNamn: {name}"
+            for (db_id,name) in users
+        ]))
 
     def help(self):
         return """Admin command for listing recently added users. To be used in combination with `connect`.

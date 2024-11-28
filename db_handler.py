@@ -114,7 +114,7 @@ class DatabaseHandler:
         Default 10
         """
         query = "SELECT id, name FROM Users ORDER BY id DESC LIMIT ?"
-        res = self.execute_command(query, (n,))
+        res = self.execute_query(query, (n,))
         return reversed(res)
     
     def save_image(self, user, file_name):
