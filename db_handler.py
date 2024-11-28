@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, timezone
 class DatabaseHandler:
     """A class to manage SQLite database interactions using a context manager."""
 
-    def __init__(self, db_path="tasks.db"):
+    def __init__(self, db_path="streck/streck.db"):
         """Initialize the database handler with the database file path."""
         self.db_path = db_path
         self.conn, self.cursor = None, None
