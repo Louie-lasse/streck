@@ -6,7 +6,7 @@ class Cider(Strecka):
         super().__init__(31)
 
     def help(self):
-        return ":rotating_light: "*3 + "BAAARRSTOOOOOPPPP" + ":rotating_light: "*3
+        return ":rotating_light: "*3 + "BAAARRSTOOOOOPPPP" + ":rotating_light: "*3 + "\nKlarar du inte att beställa får du inget"
     
     def __str__(self):
         return "`cider`: Det här kommandet kan du använda för att köpa cider... OM VI HADE NÅGON"
