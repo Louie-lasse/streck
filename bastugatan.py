@@ -191,9 +191,12 @@ def handle_help(command_registry : dict[str,Command], arg: str, say):
     Provide `help` info to the user
     """
     if len(arg) < 1:
-        say("The following commands are available:\n" +
+        say("""
+Självklart! Här kommer en lista av saker du kan göra.
+Du kan också skriva `help <command>` för mer info om ett kommand:
+""" +
             '\n'.join([
-                str(command) for command in command_registry.values()
+                f"- {command}" for command in command_registry.values()
             ])
         )
         return
