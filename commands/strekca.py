@@ -1,6 +1,5 @@
 from db_handler import DatabaseHandler
 from . import Command
-import os
 
 class Strecka(Command):
     """
@@ -11,7 +10,6 @@ class Strecka(Command):
         self.product = product_id
         super().__init__()
         self.db = DatabaseHandler()
-        self._ADMIN = os.getenv("ADMIN")
 
     def execute(self, user : dict[str,str], args : str, say):
         price = self.db.get_price(self.product)

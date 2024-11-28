@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
+import os
 
 class Command(ABC):
     """Base class for all commands."""
+
+    _ADMIN = os.getenv("ADMIN")
 
     @abstractmethod
     def execute(self, user_ids : dict[str,str], args : str, say):
