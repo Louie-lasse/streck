@@ -124,3 +124,11 @@ class DatabaseHandler:
         query = "UPDATE users SET image = ? WHERE id = ?"
         res = self.execute_command(query, (user,file_name))
         return 0 if res <= 0 else res
+
+    def connect_user(self, db_id, slack_id):
+        """
+        Connects a slack account to a db user
+        """
+        query = "UPDATE users SET slack_id = ? WHERE id = ?"
+        res = self.execute_command(query, (slack_id, db_id))
+        return 0 if res <= 0 else res
