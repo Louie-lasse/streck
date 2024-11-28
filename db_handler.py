@@ -122,7 +122,7 @@ class DatabaseHandler:
         Saves a filename to the db under a specified user
         """
         query = "UPDATE users SET image = ? WHERE id = ?"
-        res = self.execute_command(query, (user,file_name))
+        res = self.execute_command(query, (file_name, user))
         return 0 if res <= 0 else res
 
     def connect_user(self, db_id, slack_id):
