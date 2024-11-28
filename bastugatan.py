@@ -160,7 +160,6 @@ def on_press(key):
     """
     global pressed
     pressed.add(key)
-    print(pressed)
     if keys.issubset(pressed):
         pressed = set()
         on_click()
