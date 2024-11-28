@@ -106,7 +106,7 @@ class DatabaseHandler:
         """
         query = "Select price from products where id = ?"
         res = self.execute_query(query, (product,))
-        return res or 0
+        return res[0][0] if res else 0
     
     def list_users(self, n=10):
         """
