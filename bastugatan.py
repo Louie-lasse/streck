@@ -193,7 +193,7 @@ def handle_help(command_registry : dict[str,Command], arg: str, say):
     if len(arg) < 1:
         say("The following commands are available:\n" +
             '\n'.join([
-                str(command) for command in command_registry
+                str(command) for command in command_registry.values()
             ])
         )
         return
