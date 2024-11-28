@@ -132,3 +132,11 @@ class DatabaseHandler:
         query = "UPDATE users SET slack_id = ? WHERE id = ?"
         res = self.execute_command(query, (slack_id, db_id))
         return 0 if res <= 0 else res
+
+    def get_debt(self, db_id):
+        """
+        Get the current debt of a specified user
+        """
+        query = "SELECT sum(t.price) FROM transactions WHERE user = ?"
+        res = self.execute_query(query, (db_id,))
+        return res[0] if res else None

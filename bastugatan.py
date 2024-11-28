@@ -12,7 +12,7 @@ from slack import WebClient
 from dotenv import load_dotenv
 
 from db_handler import DatabaseHandler
-from commands import Command, Beer, Cider, Soda, List_Users, Update, Connect
+from commands import Command, Beer, Cider, Soda, List_Users, Update, Connect, Skuld
 from slack_helper import send_dm
 
 DEV = True
@@ -183,6 +183,7 @@ user_command_registry["öl"] = Beer()
 user_command_registry["cider"] = Cider()
 user_command_registry["läsk"] = Soda()
 user_command_registry["update"] = Update(slack_client)
+user_command_registry["skuld"] = Skuld()
 
 admin_command_registry["list_users"] = List_Users()
 admin_command_registry["connect"] = Connect(slack_client)
