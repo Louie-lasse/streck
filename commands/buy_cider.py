@@ -9,4 +9,4 @@ class Cider(Strecka):
         return ":rotating_light: "*3 + "BAAARRSTOOOOOPPPP" + ":rotating_light: "*3
     
     def __str__(self):
-        return "Det här kommandet kan du använda för att köpa cider... OM VI HADE NÅGON"
+        return "`cider`: Det här kommandet kan du använda för att köpa cider... OM VI HADE NÅGON"

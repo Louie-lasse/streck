@@ -46,4 +46,4 @@ class Update(Command):
         return """Uppdaterar din profilbild på streck appen till din nuvarande slack-profilbild"""
 
     def __str__(self):
-        return "Uppdatera din profilbild"    
+        return "`update`: Uppdatera din profilbild"

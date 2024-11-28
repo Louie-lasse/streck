@@ -14,4 +14,4 @@ class Soda(Strecka):
         """
     
     def __str__(self):
-        return "För att köpa läsk, kort och gott"
+        return "`läsk`: För att köpa läsk, kort och gott"

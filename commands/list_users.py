@@ -27,4 +27,4 @@ class List_Users(Command):
         """
         
     def __str__(self):
-        return "Gets basic information of users, like `database_id`"
+        return "`list_users`: Gets basic information of users, like `database_id`"

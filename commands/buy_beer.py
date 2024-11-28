@@ -9,4 +9,4 @@ class Beer(Strecka):
         return "DU! Om du inte klarar av att beställa själv får du fan inget"
     
     def __str__(self):
-        return "HUhmbrbrbrbbrbr... BÄRS!!!"
+        return "`öl`: HUhmbrbrbrbbrbr... BÄRS!!!"
