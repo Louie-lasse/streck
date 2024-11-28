@@ -20,6 +20,8 @@ lib
 lib64
 pyvenv.cfg
 
+misc
+
 # Installer logs
 pip-log.txt
 
