@@ -1,6 +1,7 @@
 import requests
 
 from db_handler import DatabaseHandler
+from slack_helper import get_profile_picture
 from . import Command
 
 class Update(Command):
@@ -14,21 +15,13 @@ class Update(Command):
         self.client = slack_client
 
     def execute(self, user : dict[str,str], args : str, say):
-        image_url = self._get_profile_picture(user["slack_id"])
+        image_url = get_profile_picture(self.client, user["slack_id"])
         if not self._save_image_from_url(image_url, f'streck/pictures/users/{user["name"]}.png'):
             say("Lyckades inte fixa bilden :pensive:")
             return
 
         self.db.save_image(user["db_id"], f"{user["name"]}.png")
         say("Profilbilden borde vara fixad nu!")
-
-    def _get_profile_picture(self, slack_id):
-        """Fetch the user's profile picture URL from Slack."""
-        response = self.client.users_info(user=slack_id)
-        if response["ok"]:
-            profile = response["user"]["profile"]
-            return profile.get("image_512")  # Use a medium resolution image
-        return None
 
     def _save_image_from_url(self, image_url, file_path):
         """Download and save the image from a URL."""

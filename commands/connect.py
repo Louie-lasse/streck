@@ -1,12 +1,14 @@
 from . import Command
 import re
 from db_handler import DatabaseHandler
+from slack_helper import send_dm
 
 class Connect(Command):
 
-    def __init__(self) -> None:
+    def __init__(self, slack_client) -> None:
         super().__init__()
         self.db = DatabaseHandler()
+        self.client = slack_client
 
     def execute(self, user_ids: dict[str, str], args: str, say):
         """
@@ -30,9 +32,10 @@ class Connect(Command):
         res = self.db.connect_user(db_id, slack_id)
         if res:
             say(f"Användaren <@{slack_id}> är nu kopplad till db_id {db_id}.")
-            say(
-                CHANNEL=slack_id,
-                text=f"<@{self._ADMIN}> har lagt kopplat dig till Bastugatan!"
+            send_dm(
+                self.client,
+                slack_id,
+                f"Du har blivit kopplad till Bastugatan av <@{self._ADMIN}>!"
             )
         else:
             say(f"Kunde inte koppla användaren. Kontrollera att db_id {db_id} är giltigt.")

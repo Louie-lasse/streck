@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 
 from db_handler import DatabaseHandler
 from commands import Command, Beer, Cider, Soda, List_Users, Update, Connect
+from slack_helper import send_dm
 
 DEV = True
 
@@ -184,7 +185,7 @@ user_command_registry["läsk"] = Soda()
 user_command_registry["update"] = Update(slack_client)
 
 admin_command_registry["list_users"] = List_Users()
-admin_command_registry["connect"] = Connect()
+admin_command_registry["connect"] = Connect(slack_client)
 
 def handle_help(command_registry : dict[str,Command], arg: str, say):
     """
@@ -213,9 +214,10 @@ def user_not_connected(say, command, user_id):
     """
     if command == "connect_me":
         say(f"Gott. Har skickat ett medelande till <@{ADMIN}> och bett dom lägga till dig")
-        say(
-            CHANNEL=ADMIN,
-            text=f"User <@{user_id}> wants to connect to slack. Do so using the `connect` command. Type `help` or `help connect` for more info"
+        send_dm(
+            slack_client,
+            ADMIN,
+            f"User <@{user_id}> wants to connect to slack. Do so using the `connect` command. Type `help` or `help connect` for more info"
         )
     else:
         say("Du verkar inte vara uppkoplad till slack. För att koppla upp dig, skicka `connect_me`")
