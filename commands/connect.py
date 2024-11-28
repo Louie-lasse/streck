@@ -45,7 +45,7 @@ class Connect(Command):
 
     def help(self):
         return f"""Connect a slack user to a db entry using db_id.
-Usage: `connect <db_id> @<user>
+Usage: `connect <db_id> @<user>`
 The `db_id` can be obained using `list_users`.
 The `user` above is a regular slack mention, like <@{self._ADMIN}>"""
     
