@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 from db_handler import DatabaseHandler
 from commands import Command, Beer, Cider, Soda, List_Users, Update
 
-DEV = False
+DEV = True
 
 load_dotenv()
 
