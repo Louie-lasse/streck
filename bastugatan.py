@@ -205,6 +205,21 @@ Du kan också skriva `help <command>` för mer info om ett kommand:
     else:
         say(f"Fattar inte vad du menar med {arg}?!\nPröva `help` om du behöver")
 
+def user_not_connected(say, command, user_id):
+    """
+    Handles the case where a user is not connected.
+    The execution should halt after this as most commands depend on this feature.
+    """
+    if command == "connect_me":
+        say(f"Gott. Har skickat ett medelande till <@{ADMIN}> och bett dom lägga till dig")
+        say(
+            CHANNEL=ADMIN,
+            text=f"User <@{user_id}> wants to connect to slack. Do so using the `connect` command. Type `help` or `help connect` for more info"
+        )
+    else:
+        say("Du verkar inte vara uppkoplad till slack. För att koppla upp dig, skicka `connect_me`")
+    return
+
 ##################################
 
 ### SLACK CONNECTION FUNCTIONS ###
@@ -238,14 +253,7 @@ def handle_message(event, say, _):
     args = parts[1] if len(parts) > 1 else ""
 
     if db_id is None:
-        if command == "connect_me":
-            say(f"Gott. Har skickat ett medelande till <@{ADMIN}> och bett dom lägga till dig")
-            say(
-                CHANNEL=ADMIN,
-                text=f"User <@{user_id}> wants to connect to slack. Do so using the `connect` command. Type `help` or `help connect` for more info"
-            )
-        else:
-            say("Du verkar inte vara uppkoplad till slack. För att koppla upp dig, skicka `connect_me`")
+        user_not_connected(say, command, user_id)
         return
 
     command_registry = {
