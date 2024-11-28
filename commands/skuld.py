@@ -21,4 +21,4 @@ class Skuld(Command):
         return str(self)
     
     def __str__(self):
-        return "Se hur mycket skuld du har just nu"
+        return "`skuld`: Se hur mycket skuld du har just nu"
