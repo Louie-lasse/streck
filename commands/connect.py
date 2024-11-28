@@ -2,6 +2,7 @@ from . import Command
 import re
 from db_handler import DatabaseHandler
 from slack_helper import send_dm
+from update import Update
 
 class Connect(Command):
 
@@ -9,6 +10,7 @@ class Connect(Command):
         super().__init__()
         self.db = DatabaseHandler()
         self.client = slack_client
+        self.updator = Update(slack_client)
 
     def execute(self, user_ids: dict[str, str], args: str, say):
         """
@@ -37,6 +39,7 @@ class Connect(Command):
                 slack_id,
                 f"Du har blivit kopplad till Bastugatan av <@{self._ADMIN}>!"
             )
+            self.updator.execute(slack_id, "", say)
         else:
             say(f"Kunde inte koppla användaren. Kontrollera att db_id {db_id} är giltigt.")
 
