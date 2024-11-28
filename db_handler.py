@@ -108,10 +108,10 @@ class DatabaseHandler:
         res = self.execute_query(query, (product,))
         return res[0][0] if res else 0
     
-    def list_users(self, n=10):
+    def list_users(self, n=5):
         """
         Returns the `n` most recently added users.
-        Default 10
+        Default 5
         """
         query = "SELECT id, name FROM Users ORDER BY id DESC LIMIT ?"
         res = self.execute_query(query, (n,))

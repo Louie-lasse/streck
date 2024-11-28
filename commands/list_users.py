@@ -14,7 +14,7 @@ class List_Users(Command):
                 return
             n = int(args)
         else:
-            n = 10
+            n = 5
         users = self.db.list_users(n)
         say('\n'.join([
             f"id: {db_id}\t\tNamn: {name}"
@@ -23,7 +23,7 @@ class List_Users(Command):
 
     def help(self):
         return """Admin command for listing recently added users. To be used in combination with `connect`.
-        When used on its own, 10 users will be provided (`database_id` and `name`). This number can be specified with each request.
+        When used on its own, 5 users will be provided (`database_id` and `name`). This number can be specified with each request.
         Usage:
         * `list_users`
         * `list_users 15`
