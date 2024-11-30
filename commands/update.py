@@ -20,7 +20,7 @@ class Update(Command):
             say("Lyckades inte fixa bilden :pensive:")
             return
 
-        self.db.save_image(user["db_id"], f"{user["name"]}.png")
+        self.db.save_image(user["db_id"], f"{user['name']}.png")
         say("Profilbilden borde vara fixad nu!")
 
     def _save_image_from_url(self, image_url, file_path):
