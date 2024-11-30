@@ -7,7 +7,7 @@ class Skuld(Command):
         super().__init__()
         self.db = DatabaseHandler()
 
-    def execute(self, user_ids: dict[str, str], args: str, say):
+    def execute(self, user_ids, args: str, say):
         res = self.db.get_debt(user_ids['db_id'])
         if not res:
             say("Lyckades inte hämta din skuld :pensive:")
