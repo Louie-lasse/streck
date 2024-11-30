@@ -9,7 +9,7 @@ class List_Users(Command):
 
     def execute(self, _, args: str, say):
         if len(args) > 0:
-            if not args.isnumeric() or int(args) != float(args):
+            if not args.isdigit():
                 say("Please provide an integer value, or nothing to get the default `10`")
                 return
             n = int(args)
