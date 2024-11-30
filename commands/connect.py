@@ -28,10 +28,6 @@ class Connect(Command):
 
         db_id, slack_id = match.groups()
 
-        if not db_id.isdigit():
-            say("db_id must be an integer")
-            return
-
         res = self.db.connect_user(db_id, slack_id)
         if res:
             say(f"Användaren <@{slack_id}> är nu kopplad till db_id {db_id}.")
