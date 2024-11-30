@@ -12,7 +12,7 @@ from slack import WebClient
 from dotenv import load_dotenv
 
 from db_handler import DatabaseHandler
-from commands import Command, Beer, Cider, Soda, List_Users, Update, Connect, Skuld, Strecklista
+from commands import Command, Beer, Cider, Soda, List_Users, Update, Connect, Skuld, Strecklista, Who_Is
 from slack_helper import send_dm
 
 DEV = True
@@ -188,6 +188,7 @@ user_command_registry["skuld"] = Skuld()
 admin_command_registry["list_users"] = List_Users()
 admin_command_registry["connect"] = Connect(slack_client)
 admin_command_registry["strecklista"] = Strecklista()
+admin_command_registry["whois"] = Who_Is()
 
 def handle_help(command_registry : dict[str,Command], arg: str, say):
     """
