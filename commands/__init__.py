@@ -10,3 +10,4 @@ from .list_users import List_Users
 from .update import Update
 from .connect import Connect
 from .skuld import Skuld
+from .strecklista import Strecklista
