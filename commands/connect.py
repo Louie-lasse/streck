@@ -28,8 +28,9 @@ class Connect(Command):
 
         db_id, slack_id = match.groups()
 
-        if not db_id.isnumeric() or str(db_id) != float(db_id):
+        if not db_id.isnumeric() or int(db_id) != float(db_id):
             say("db_id must be an integer")
+            return
 
         res = self.db.connect_user(db_id, slack_id)
         if res:
