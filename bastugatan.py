@@ -192,7 +192,7 @@ admin_command_registry["connect"] = Connect(slack_client)
 admin_command_registry["strecklista"] = Strecklista()
 admin_command_registry["whois"] = Who_Is()
 
-def handle_help(command_registry : dict[str,Command], arg: str, say):
+def handle_help(command_registry, arg: str, say):
     """
     Provide `help` info to the user
     """
