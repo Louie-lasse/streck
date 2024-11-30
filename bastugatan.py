@@ -223,6 +223,8 @@ def user_not_connected(say, command, user_id):
             ADMIN,
             f"User <@{user_id}> wants to connect to slack. Do so using the `connect` command. Type `help` or `help connect` for more info"
         )
+    elif command=="whoami":
+        say(user_id)
     else:
         say("Du verkar inte vara uppkopplad till slack. För att koppla upp dig, skicka `connect_me`")
     return
