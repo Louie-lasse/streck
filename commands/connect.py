@@ -50,4 +50,4 @@ The `db_id` can be obained using `list_users`.
 The `user` above is a regular slack mention, like <@{self._ADMIN}>"""
     
     def __str__(self):
-        return "`connect` (ADMIN): Connects a slack user to a db entry."
+        return "`connect` (admin): Connects a slack user to a db entry."

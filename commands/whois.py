@@ -28,4 +28,4 @@ class Who_Is(Command):
         )
     
     def __str__(self):
-        return "whois (admin): Kolla en användares slack_id"
+        return "`whois` (admin): Kolla en användares slack_id"

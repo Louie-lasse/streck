@@ -29,4 +29,4 @@ class Strecklista(Command):
 Detta är tänkt att hjälpa kaffekassaansvarig med att kassera ut kaffekassan"""
 
     def __str__(self):
-        return "`strecklista`: Se hur nuvarande strecklistan ser ut"
+        return "`strecklista` (admin): Se hur nuvarande strecklistan ser ut"
