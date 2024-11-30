@@ -17,7 +17,7 @@ from db_handler import DatabaseHandler
 from commands import Command, Beer, Cider, Soda, Connect, List_Users, Request, Skuld, Strecklista, Update, Whoami, Who_Is
 from slack_helper import send_dm
 
-DEV = True
+DEV = False
 
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 SLACK_APP_TOKEN = os.getenv("SLACK_APP_TOKEN")
