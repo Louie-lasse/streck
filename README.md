@@ -59,6 +59,8 @@ All development of Streck is done on Github. If you'd like to contribute, please
 
 Pull requests are best made from separate branches (i.e. one branch per request/feature), not from `master`. Pull requests also imply that you agree to licensing your code under the relevant license.
 
-## Planned improvements
+# Bastugatan
 
-* Internationalization/translation support. This is on hold, see the `babel` branch.
+Bastugatan is an application built to work in parallel with `streck`. To use it, you need to populate a `.env` file with values, and add `slack_id` to the db entry which will be the admin.
+
+To find your slack_id, simply dm `whoami` to the bot
