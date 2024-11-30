@@ -6,7 +6,7 @@ class Beer(Strecka):
         super().__init__(30)
 
     def help(self):
-        return "DU! Om du inte klarar av att beställa själv får du fan inget"
+        return "DU! Om du inte klarar av att sträcka själv får du fan inget"
     
     def __str__(self):
         return "`öl`: HUhmbrbrbrbbrbr... BÄRS!!!"
