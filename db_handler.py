@@ -137,6 +137,16 @@ class DatabaseHandler:
         """
         Get the current debt of a specified user
         """
-        query = "SELECT sum(t.price) FROM transactions WHERE user = ?"
+        query = "SELECT sum(t.price) FROM transactions t WHERE user = ?"
         res = self.execute_query(query, (db_id,))
-        return res[0] if res else None
+        return res[0][0] if res else None
+    
+    def get_all_debts(self):
+        query = """
+            SELECT u.name, u.slack_id, sum(t.price) AS skuld
+            FROM users u
+            JOIN transactions t ON t.user = u.id
+            GROUP BY u.name
+            ORDER BY skuld desc;
+            """
+        return self.execute_query(query, ())

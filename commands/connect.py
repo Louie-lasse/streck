@@ -2,7 +2,7 @@ from . import Command
 import re
 from db_handler import DatabaseHandler
 from slack_helper import send_dm
-from update import Update
+from .update import Update
 
 class Connect(Command):
 

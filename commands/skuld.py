@@ -14,7 +14,7 @@ class Skuld(Command):
             return
         say(
             f"Du är skyldig {res} kr" +
-            "Fy fan" if res > 1000 else ""
+            "\nFy fan" if res > 1000 else ""
         )
 
     def help(self):
