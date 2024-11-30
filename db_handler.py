@@ -92,6 +92,14 @@ class DatabaseHandler:
         res = self.execute_query(query, (slack_id,))
         return res[0] if res else (None,None)
     
+    def remove_slack(self, db_id):
+        """
+        Clears a bd user of slack_id.
+        """
+        q = "UPDATE Users SET slack_id=NULL WHERE id = ?"
+        res = self.execute_command(q, (db_id,))
+        return 0 if res <= 0 else res
+    
     def purchase(self, db_id, product, price):
         """
         Adds a transaction to a user
@@ -131,7 +139,11 @@ class DatabaseHandler:
         """
         query = "UPDATE users SET slack_id = ? WHERE id = ?"
         res = self.execute_command(query, (slack_id, db_id))
-        return 0 if res <= 0 else res
+        if res <= 0:
+            return None
+        q2 = "SELECT name FROM Users WHERE id = ?"
+        res = self.execute_query(q2, (db_id,))
+        return res[0]
 
     def get_debt(self, db_id):
         """

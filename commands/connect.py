@@ -28,9 +28,20 @@ class Connect(Command):
 
         db_id, slack_id = match.groups()
 
+        old = self.db.get_user(slack_id)
+        if not old:
+            if self.db.remove_slack(old[0]):
+                say(
+                    f"Disconnected the user previously associated with <@{slack_id}>" +
+                    f"Old user: {old[1]}"
+                    )
+            else:
+                say(f"Something went wrong. A user is already connected to <@{slack_id}>, but was unable to remove them")
+                return
+
         res = self.db.connect_user(db_id, slack_id)
         if res:
-            say(f"Användaren <@{slack_id}> är nu kopplad till db_id {db_id}.")
+            say(f"Användaren <@{slack_id}> är nu kopplad till db_id {db_id} ({res[0]}).")
             send_dm(
                 self.client,
                 slack_id,
