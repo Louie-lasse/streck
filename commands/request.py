@@ -18,7 +18,7 @@ class Request(Command):
         if send_dm(
                 slack_client=self._client,
                 user=self._ADMIN,
-                message=f"User <@{user_ids["slack_id"]}> is requesting a new feature:\n```\n{args}\n```"
+                message=f"User <@{user_ids['slack_id']}> is requesting a new feature:\n```\n{args}\n```"
             ):
             say(f"Skickat vidare din förfrågan till <@{self._ADMIN}>")
         else:
