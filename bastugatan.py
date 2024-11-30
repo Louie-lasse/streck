@@ -11,13 +11,13 @@ from slack import WebClient
 
 from dotenv import load_dotenv
 
+load_dotenv()
+
 from db_handler import DatabaseHandler
-from commands import Command, Beer, Cider, Soda, List_Users, Update, Connect, Skuld, Strecklista, Who_Is, Whoami
+from commands import Command, Beer, Cider, Soda, Connect, List_Users, Request, Skuld, Strecklista, Update, Whoami, Who_Is
 from slack_helper import send_dm
 
 DEV = True
-
-load_dotenv()
 
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 SLACK_APP_TOKEN = os.getenv("SLACK_APP_TOKEN")
@@ -185,6 +185,7 @@ user_command_registry["läsk"] = Soda()
 user_command_registry["update"] = Update(slack_client)
 user_command_registry["skuld"] = Skuld()
 user_command_registry["whoami"] = Whoami()
+user_command_registry["request"] = Request(slack_client)
 
 admin_command_registry["list_users"] = List_Users()
 admin_command_registry["connect"] = Connect(slack_client)
