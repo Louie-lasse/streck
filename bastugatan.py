@@ -246,7 +246,7 @@ def handle_mention(*_):
         ])))
 
 @app.event("message")
-def handle_message(event, say, _):
+def handle_message(event, say, ignored):
     """Main function to handle incoming Slack messages."""
     if event["channel_type"] != "im":
         return # ignore messages not in DM
