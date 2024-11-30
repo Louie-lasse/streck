@@ -7,7 +7,7 @@ class Request(Command):
         super().__init__()
         self._client = slack_client
 
-    def execute(self, user_ids: dict[str, str], args: str, say):
+    def execute(self, user_ids, args: str, say):
         if not args:
             say("Skriv `request` följt av vad du vill ha för ny feature.")
             return

@@ -7,7 +7,7 @@ class Strecklista(Command):
         super().__init__()
         self.db = DatabaseHandler()
 
-    def execute(self, user_ids: dict[str, str], args: str, say):
+    def execute(self, user_ids, args: str, say):
         all = self.db.get_all_debts()
         res = [v for v in
                filter(

@@ -12,7 +12,7 @@ class Connect(Command):
         self.client = slack_client
         self.updator = Update(slack_client)
 
-    def execute(self, user_ids: dict[str, str], args: str, say):
+    def execute(self, user_ids, args: str, say):
         """
         Connects a user by associating a db_id with a Slack ID.
         Args:

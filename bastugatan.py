@@ -39,21 +39,21 @@ db = DatabaseHandler()
 
 ### GENERAL HELPER FUNCTIONS ###
 
-def list_users(u: list[str]) -> str:
+def list_users(u) -> str:
     """
     Given a list of users, return a formated string containing those users
     """
     return (random.choice(u) if len(u)==1
                else ", ".join(u[:-1]) + " och " + u[-1])
 
-def deltagare(users: list[str]) -> str:
+def deltagare(users) -> str:
     """
     Given a list of users, return a formated string containing those users
     """
     return "" if len(users) == 0 else ("Deltagare: "+list_users(users))
 
 
-def block_of(text: str) -> dict[str, any]:
+def block_of(text: str):
     """
     Given a message, generate a `block` in accordance with SLACK BOT API
     """
@@ -65,7 +65,7 @@ def block_of(text: str) -> dict[str, any]:
         }
     }
 
-def get_message(users: list[str]) -> str:
+def get_message(users) -> str:
     """
     Given a list of users, generate a random message
     """
@@ -176,8 +176,8 @@ def on_release(key):
 
 ### CLI FUNCTIONS ###
 
-user_command_registry : dict[str,Command] = {}
-admin_command_registry : dict[str,Command] = {}
+user_command_registry= {}
+admin_command_registry= {}
 
 user_command_registry["öl"] = Beer()
 user_command_registry["cider"] = Cider()

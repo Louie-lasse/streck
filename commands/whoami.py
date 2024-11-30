@@ -3,7 +3,7 @@ from . import Command
 
 class Whoami(Command):
 
-    def execute(self, user_ids: dict[str, str], args: str, say):
+    def execute(self, user_ids, args: str, say):
         say(f"{user_ids["slack_id"]}")
     
     def help(self):

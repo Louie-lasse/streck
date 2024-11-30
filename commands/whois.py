@@ -3,7 +3,7 @@ from . import Command
 
 class Who_Is(Command):
 
-    def execute(self, user_ids: dict[str, str], args: str, say):
+    def execute(self, user_ids, args: str, say):
         if args.lower() == "admin":
             say(f"<@{self._ADMIN}>: {self._ADMIN}")
             return

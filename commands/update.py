@@ -14,7 +14,7 @@ class Update(Command):
         self.db = DatabaseHandler()
         self.client = slack_client
 
-    def execute(self, user : dict[str,str], args : str, say):
+    def execute(self, user, args : str, say):
         image_url = get_profile_picture(self.client, user["slack_id"])
         if not self._save_image_from_url(image_url, f'streck/pictures/users/{user["name"]}.png'):
             say("Lyckades inte fixa bilden :pensive:")

@@ -7,7 +7,7 @@ class Command(ABC):
     _ADMIN = os.getenv("ADMIN")
 
     @abstractmethod
-    def execute(self, user_ids : dict[str,str], args : str, say):
+    def execute(self, user_ids, args : str, say):
         """
         A custom command to execute for the slack bot
         """
