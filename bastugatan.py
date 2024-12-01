@@ -31,7 +31,7 @@ pressed = set()
 ADMIN = os.getenv("ADMIN")
 
 
-CHANNEL = os.getenv("DEV_CHANNEL") if DEV else os.getenv("DEV_CHANNEL")
+CHANNEL = os.getenv("DEV_CHANNEL") if DEV else os.getenv("PROD_CHANNEL")
 
 keys = {keyboard.Key.ctrl_l, keyboard.Key.f8}
 
