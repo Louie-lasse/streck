@@ -15,7 +15,7 @@ load_dotenv()
 
 from db_handler import DatabaseHandler
 from commands import Command, Beer, Cider, Soda, Connect, List_Users, Request, Skuld, Strecklista, Update, Whoami, Who_Is
-from slack_helper import send_dm
+from slack_helper import send_dm, send_message
 
 DEV = True
 
@@ -110,17 +110,6 @@ def get_message(users) -> str:
         return random.choice(nullary)([])
     return random.choice(nullary + nary)(users)
 
-
-def send_message(message) -> None:
-    """
-    Post a given message to slack using the slack client
-    """
-    if isinstance(message, list):
-        blocks = message
-    else:
-        blocks = [message]
-    slack_client.chat_postMessage(channel=CHANNEL, blocks=blocks)
-
 ############################
 
 ### KEY/BUTTON FUNCTIONS ###
@@ -142,7 +131,7 @@ def trigger_web_hook():
     
     reset_timer()
     text = get_message(users)
-    send_message(text)
+    send_message(slack_client, CHANNEL, text)
 
 def on_click():
     """
@@ -241,11 +230,18 @@ def handle_mention(*_):
     """
     users = db.get_recent_users()
     if users == []:
-        send_message(block_of(b'Verkar inte va n\xc3\xa5n h\xc3\xa4r, men va fan vet jag'.decode('utf-8')))
+        send_message(
+            slack_client,
+            CHANNEL,
+            block_of(b'Verkar inte va n\xc3\xa5n h\xc3\xa4r, men va fan vet jag'.decode('utf-8'))
+            )
     else:
-        send_message(block_of(os.linesep.join([
-            b'Bastugatan \xc3\xa4r \xc3\xb6ppen!'.decode('utf-8'),
-            deltagare(users)
+        send_message(
+            slack_client,
+            CHANNEL,
+            block_of(os.linesep.join([
+                b'Bastugatan \xc3\xa4r \xc3\xb6ppen!'.decode('utf-8'),
+                deltagare(users)
         ])))
 
 @app.event("message")
