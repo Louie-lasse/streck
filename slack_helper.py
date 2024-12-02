@@ -32,4 +32,16 @@ def send_message(slack_client, channel, message) -> None:
         blocks = message
     else:
         blocks = [message]
-    slack_client.chat_postMessage(channel, blocks=blocks)
+    slack_client.chat_postMessage(channel=channel, blocks=blocks)
+
+def block_of(text: str):
+    """
+    Given a message, generate a `block` in accordance with SLACK BOT API
+    """
+    return {
+        "type": "section",
+        "text": {
+        "type": "plain_text",
+            "text": text
+        }
+    }

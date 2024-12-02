@@ -1,5 +1,5 @@
 from . import Command
-from slack_helper import send_message
+from slack_helper import send_message, block_of
 
 class Say(Command):
 
@@ -21,7 +21,7 @@ class Say(Command):
         send_message(
             self._client,
             self.channel,
-            message=args
+            message=block_of(args)
         )
         say(f"Sent the message in <#{self.channel}>")
 

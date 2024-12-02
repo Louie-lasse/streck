@@ -15,7 +15,7 @@ load_dotenv()
 
 from db_handler import DatabaseHandler
 from commands import Command, Beer, Cider, Soda, Connect, List_Users, Request, Skuld, Strecklista, Update, Whoami, Who_Is, Say
-from slack_helper import send_dm, send_message
+from slack_helper import send_dm, send_message, block_of
 
 DEV = False
 
@@ -51,19 +51,6 @@ def deltagare(users) -> str:
     Given a list of users, return a formated string containing those users
     """
     return "" if len(users) == 0 else ("Deltagare: "+list_users(users))
-
-
-def block_of(text: str):
-    """
-    Given a message, generate a `block` in accordance with SLACK BOT API
-    """
-    return {
-        "type": "section",
-        "text": {
-        "type": "plain_text",
-            "text": text
-        }
-    }
 
 def get_message(users) -> str:
     """
@@ -129,6 +116,7 @@ def trigger_web_hook():
     if users == []:
         return
     users = [u[0] for u in users]
+    print(users)
     
     reset_timer()
     text = get_message(users)
@@ -231,6 +219,7 @@ def handle_mention(*_):
     Function to handle when the bot is mentioned @bastugatan
     """
     users = db.get_recent_users()
+    users = [u[0] for u in users]
     if users == []:
         send_message(
             slack_client,
