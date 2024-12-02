@@ -128,6 +128,7 @@ def trigger_web_hook():
     users = db.get_recent_users()
     if users == []:
         return
+    users = [u[0] for u in users]
     
     reset_timer()
     text = get_message(users)
