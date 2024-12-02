@@ -189,7 +189,7 @@ user_command_registry["request"] = Request(slack_client)
 
 admin_command_registry["list_users"] = List_Users()
 admin_command_registry["connect"] = Connect(slack_client)
-admin_command_registry["strecklista"] = Strecklista()
+admin_command_registry["strecklista"] = Strecklista(slack_client)
 admin_command_registry["whois"] = Who_Is()
 
 def handle_help(command_registry, arg: str, say):

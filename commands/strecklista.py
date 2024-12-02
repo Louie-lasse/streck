@@ -1,11 +1,14 @@
+from slack_helper import send_dm
 from . import Command
 from db_handler import DatabaseHandler
+import re
 
 class Strecklista(Command):
 
-    def __init__(self) -> None:
+    def __init__(self, slack_client) -> None:
         super().__init__()
         self.db = DatabaseHandler()
+        self._client = slack_client
 
     def execute(self, user_ids, args: str, say):
         all = self.db.get_all_debts()
@@ -16,12 +19,24 @@ class Strecklista(Command):
             )
         ]
         width = max(len(f"<@{r[1]}>" if r[1] else r[0]) for r in res)
-        say(
-            '\n'.join([
+
+        message = '\n'.join([
                 (f"<@{r[1]}>" if r[1] else f"{r[0]}").ljust(width)
                 + f"\t{int(r[2])}"
                 for r in res
             ])
+        
+        match = re.match(r"<@([A-Z0-9]+)>", args)
+        if match:
+            send_dm(
+                self._client,
+                match.group(1),
+                message
+            )
+            message = f"Skickat strecklista till <@{match.group(1)}>"
+
+        say(
+            message
         )
 
     def help(self):
