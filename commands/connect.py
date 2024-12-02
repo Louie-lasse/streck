@@ -50,7 +50,8 @@ class Connect(Command):
             self.updator.execute(
                 {
                     "slack_id": slack_id,
-                    "db_id": db_id
+                    "db_id": db_id,
+                    "name": res[0]
                 },
                 "",
                 lambda text:
