@@ -47,7 +47,19 @@ class Connect(Command):
                 slack_id,
                 f"Du har blivit kopplad till Bastugatan av <@{self._ADMIN}>!"
             )
-            self.updator.execute(slack_id, "", say)
+            self.updator.execute(
+                {
+                    "slack_id": slack_id,
+                    "db_id": db_id
+                },
+                "",
+                lambda text:
+                    send_dm(
+                        self.client,
+                        slack_id,
+                        text
+                    )
+            )
         else:
             say(f"Kunde inte koppla användaren. Kontrollera att db_id {db_id} är giltigt.")
 
