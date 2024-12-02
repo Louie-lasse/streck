@@ -14,3 +14,4 @@ from .strecklista import Strecklista
 from .whois import Who_Is
 from .whoami import Whoami
 from .request import Request
+from .say import Say

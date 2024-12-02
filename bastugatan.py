@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from db_handler import DatabaseHandler
-from commands import Command, Beer, Cider, Soda, Connect, List_Users, Request, Skuld, Strecklista, Update, Whoami, Who_Is
+from commands import Command, Beer, Cider, Soda, Connect, List_Users, Request, Skuld, Strecklista, Update, Whoami, Who_Is, Say
 from slack_helper import send_dm, send_message
 
 DEV = True
@@ -180,6 +180,7 @@ admin_command_registry["list_users"] = List_Users()
 admin_command_registry["connect"] = Connect(slack_client)
 admin_command_registry["strecklista"] = Strecklista(slack_client)
 admin_command_registry["whois"] = Who_Is()
+admin_command_registry["say"] = Say(slack_client, CHANNEL)
 
 def handle_help(command_registry, arg: str, say):
     """
