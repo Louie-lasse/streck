@@ -17,5 +17,6 @@ from .request import Request
 from .say import Say
 from .whereis import Where_Is
 from .add import Add
+from .disconnect import Disconnect
 
 from .command_registry import Command_registry

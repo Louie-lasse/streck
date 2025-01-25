@@ -28,8 +28,11 @@ class Add(Command):
         if not res:
             return say(f"Kunde inte lägga till användaren {name} med streckkod {barcode}.\n"+
                        "Pröva `list_users` för att se om användaren redan finns.")
+        
+        db_id = self.db.get_user_by_barcode(barcode)[0]
+        print(f"{db_id} <@{slack_id}>")
 
-        #self.connector.execute(user_ids, f"{res[0]} <@{slack_id}>", say)
+        self.connector.execute(user_ids, f"{db_id} <@{slack_id}>", say)
 
 
     def _usage(self):

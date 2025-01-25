@@ -92,6 +92,14 @@ class DatabaseHandler:
         res = self.execute_query(query, (slack_id,))
         return res[0] if res else (None,None)
     
+    def get_user_by_barcode(self, barcode):
+        """
+        Gets the users actual database id for identification and interaction with the database
+        """
+        query = "SELECT id, name FROM Users U where barcode=?"
+        res = self.execute_query(query, (barcode,))
+        return res[0] if res else (None,None)
+    
     def remove_slack(self, db_id):
         """
         Clears a bd user of slack_id.
@@ -144,6 +152,14 @@ class DatabaseHandler:
         q2 = "SELECT name FROM Users WHERE id = ?"
         res = self.execute_query(q2, (db_id,))
         return res[0]
+    
+    def disconnect_user(self, slack_id):
+        """
+        Disconnects a user from the database
+        """
+        query = "UPDATE users SET slack_id = NULL WHERE slack_id = ?"
+        res = self.execute_command(query, (slack_id,))
+        return 0 if res <= 0 else res
 
     def get_debt(self, db_id):
         """
