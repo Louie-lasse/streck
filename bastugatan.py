@@ -17,7 +17,7 @@ from db_handler import DatabaseHandler
 from commands import *
 from slack_helper import send_dm, send_message, block_of
 
-DEV = True
+DEV = False
 
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 SLACK_APP_TOKEN = os.getenv("SLACK_APP_TOKEN")
