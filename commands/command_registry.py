@@ -4,7 +4,7 @@ from . import Command
 class Command_registry():
 
     def __init__(self) -> None:
-        self._registry: dict[str,Command] = {}
+        self._registry = {}
 
     def add(self, command: Command) -> None:
         self._registry[command.__cmd__()] = command
