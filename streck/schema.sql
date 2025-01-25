@@ -8,7 +8,8 @@ create table users (
 	enabled boolean not null,
 	name text not null,
 	image text,
-	notes text
+	notes text,
+	slack_id text unique not null
 );
 create table products (
 	id integer primary key autoincrement,
