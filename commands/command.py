@@ -6,10 +6,19 @@ class Command(ABC):
 
     _ADMIN = os.getenv("ADMIN")
 
+    def __str__(self):
+        """
+        A simple, one-line, description of the function. Used by the `help` command
+        """
+        return f"`{self.__cmd__()}`: {self.description()}"
+
+    def __repr__(self):
+        return self.__cmd__()
+
     @abstractmethod
     def execute(self, user_ids, args : str, say):
         """
-        A custom command to execute for the slack bot
+        How the command should be executed
         """
 
     @abstractmethod
@@ -19,7 +28,15 @@ class Command(ABC):
         """
 
     @abstractmethod
-    def __str__(self):
+    def description(self):
         """
-        A simple, one-line, description of the function. Used by the `help` command
+        A short, one line, description of the command
         """
+        pass
+    
+    @abstractmethod
+    def __cmd__(self):
+        """
+        The command name. The accutal command used by the user
+        """
+        pass

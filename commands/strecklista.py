@@ -43,5 +43,8 @@ class Strecklista(Command):
         return """Skriver ut toplistan av allas skulder just nu. Rensar INTE skulder.
 Detta är tänkt att hjälpa kaffekassaansvarig med att kassera ut kaffekassan"""
 
-    def __str__(self):
-        return "`strecklista` (admin): Se hur nuvarande strecklistan ser ut"
+    def description(self):
+        return "Se hur nuvarande strecklistan ser ut"
+    
+    def __cmd__(self):
+        return "strecklista"

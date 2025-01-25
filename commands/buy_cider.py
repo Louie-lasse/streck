@@ -11,5 +11,8 @@ class Cider(Strecka):
             "\nKlarar du inte att sträcka själv får du inget"
         )
     
-    def __str__(self):
-        return "`cider`: Det här kommandet kan du använda för att köpa cider... OM VI HADE NÅGON"
+    def description(self):
+        return "Det här kommandet kan du använda för att köpa cider... OM VI HADE NÅGON"
+    
+    def __cmd__(self):
+        return "cider"

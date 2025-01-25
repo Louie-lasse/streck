@@ -25,7 +25,10 @@ class Request(Command):
             say("Lyckades inte skicka meddelandet :pensive:")
 
     def help(self):
-        return "Skicka ett förlag på en ny feature.\nAnvändning: `request <beskrivning av vad du vill ha>`."
+        return f"Skicka ett förlag på en ny feature.\nAnvändning: `{self.__cmd__()} <beskrivning av vad du vill ha>`."
     
-    def __str__(self):
-        return "`request`: Föreslå en ny feature."
+    def description(self):
+        return "Föreslå en ny feature."
+    
+    def __cmd__(self):
+        return "request"

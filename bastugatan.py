@@ -14,10 +14,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from db_handler import DatabaseHandler
-from commands import Command, Beer, Cider, Soda, Connect, List_Users, Request, Skuld, Strecklista, Update, Whoami, Who_Is, Say
+from commands import *
 from slack_helper import send_dm, send_message, block_of
 
-DEV = False
+DEV = True
 
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 SLACK_APP_TOKEN = os.getenv("SLACK_APP_TOKEN")
@@ -154,35 +154,32 @@ def on_release(key):
 
 ### CLI FUNCTIONS ###
 
-user_command_registry= {}
-admin_command_registry= {}
+user_command_registry = Command_registry()
+user_command_registry.add(Beer())
+user_command_registry.add(Cider())
+user_command_registry.add(Soda())
+user_command_registry.add(Update(slack_client))
+user_command_registry.add(Skuld())
+user_command_registry.add(Whoami())
+user_command_registry.add(Request(slack_client))
 
-user_command_registry["öl"] = Beer()
-user_command_registry["cider"] = Cider()
-user_command_registry["läsk"] = Soda()
-user_command_registry["update"] = Update(slack_client)
-user_command_registry["skuld"] = Skuld()
-user_command_registry["whoami"] = Whoami()
-user_command_registry["request"] = Request(slack_client)
-
-admin_command_registry["list_users"] = List_Users()
-admin_command_registry["connect"] = Connect(slack_client)
-admin_command_registry["strecklista"] = Strecklista(slack_client)
-admin_command_registry["whois"] = Who_Is()
-admin_command_registry["say"] = Say(slack_client, CHANNEL)
+admin_command_registry = Command_registry()
+admin_command_registry.add(List_Users())
+admin_command_registry.add(Connect(slack_client))
+admin_command_registry.add(Strecklista(slack_client))
+admin_command_registry.add(Who_Is())
+admin_command_registry.add(Say(slack_client, CHANNEL))
 
 def handle_help(command_registry, arg: str, say):
     """
     Provide `help` info to the user
     """
     if len(arg) < 1:
-        say("""
+        say(f"""
 Självklart! Här kommer en lista av saker du kan göra.
 Du kan också skriva `help <command>` för mer info om ett kommand:
-""" +
-            '\n'.join([
-                f"- {command}" for command in command_registry.values()
-            ])
+{command_registry}
+"""
         )
         return
 
@@ -214,10 +211,13 @@ def user_not_connected(say, command, user_id):
 ### SLACK CONNECTION FUNCTIONS ###
 
 @app.event("app_mention")
-def handle_mention(*_):
+def handle_mention(event, say, *_):
     """
     Function to handle when the bot is mentioned @bastugatan
     """
+    if event["channel"] != CHANNEL:
+        say(f"Jag svarar tyvärr bara i <#{CHANNEL}>")
+        return
     users = db.get_recent_users()
     users = [u[0] for u in users]
     if users == []:
@@ -236,7 +236,7 @@ def handle_mention(*_):
         ])))
 
 @app.event("message")
-def handle_message(event, say, ignored):
+def handle_message(event, say, *_):
     """Main function to handle incoming Slack messages."""
     if event["channel_type"] != "im":
         return # ignore messages not in DM
@@ -253,10 +253,11 @@ def handle_message(event, say, ignored):
         user_not_connected(say, command, user_id)
         return
 
-    command_registry = {
-        **user_command_registry,
-        **(admin_command_registry if user_id == ADMIN else {})
-    }
+    command_registry = (
+        user_command_registry.merge(admin_command_registry)
+        if user_id == ADMIN
+        else user_command_registry
+    )
 
     if command == "help":
         handle_help(command_registry, args, say)

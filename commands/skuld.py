@@ -20,5 +20,8 @@ class Skuld(Command):
     def help(self):
         return str(self)
     
-    def __str__(self):
-        return "`skuld`: Se hur mycket skuld du har just nu"
+    def description(self):
+        return "Se hur mycket skuld du har just nu"
+    
+    def __cmd__(self):
+        return "skuld"

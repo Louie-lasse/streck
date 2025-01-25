@@ -8,5 +8,8 @@ class Beer(Strecka):
     def help(self):
         return "DU! Om du inte klarar av att sträcka själv får du fan inget"
     
-    def __str__(self):
-        return "`öl`: HUhmbrbrbrbbrbr... BÄRS!!!"
+    def description(self):
+        return "HUhmbrbrbrbbrbr... BÄRS!!!"
+    
+    def __cmd__(self):
+        return "öl"

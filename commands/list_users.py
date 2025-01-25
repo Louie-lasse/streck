@@ -22,12 +22,15 @@ class List_Users(Command):
         ]))
 
     def help(self):
-        return """Admin command for listing recently added users. To be used in combination with `connect`.
+        return f"""Admin command for listing recently added users. To be used in combination with `connect`.
         When used on its own, 5 users will be provided (`database_id` and `name`). This number can be specified with each request.
         Usage:
-        * `list_users`
-        * `list_users 15`
+        * `{self.__cmd__()}`: Lists 5 users
+        * `{self.__cmd__()} <n>`: Lists `n` users
         """
-        
-    def __str__(self):
-        return "`list_users` (admin): Gets basic information of users, like `database_id`"
+
+    def description(self):
+        return "Gets basic information of users, like `database_id`"
+    
+    def __cmd__(self):
+        return "list_users"

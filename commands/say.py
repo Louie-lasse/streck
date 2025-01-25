@@ -31,5 +31,8 @@ class Say(Command):
     def _usage(self):
         return "Usage: `say <message>`"
     
-    def __str__(self):
-        return f"`say` (admin): send a message as <@{self.bot_id}>"
+    def description(self):
+        return f"Sends a message as <@{self.bot_id}> in <#{self.channel}>"
+    
+    def __cmd__(self):
+        return "say"

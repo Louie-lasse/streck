@@ -14,13 +14,13 @@ class Update(Command):
         self.db = DatabaseHandler()
         self.client = slack_client
 
-    def execute(self, user, args : str, say):
-        image_url = get_profile_picture(self.client, user["slack_id"])
-        if not self._save_image_from_url(image_url, f'streck/pictures/users/{user["name"]}.png'):
+    def execute(self, user_ids, args : str, say):
+        image_url = get_profile_picture(self.client, user_ids["slack_id"])
+        if not self._save_image_from_url(image_url, f'streck/pictures/users/{user_ids["name"]}.png'):
             say("Lyckades inte fixa bilden :pensive:")
             return
 
-        self.db.save_image(user["db_id"], f"{user['name']}.png")
+        self.db.save_image(user_ids["db_id"], f"{user_ids['name']}.png")
         say("Profilbilden borde vara fixad nu!")
 
     def _save_image_from_url(self, image_url, file_path):
@@ -37,6 +37,9 @@ class Update(Command):
         
     def help(self):
         return """Uppdaterar din profilbild på streck appen till din nuvarande slack-profilbild"""
-
-    def __str__(self):
-        return "`update`: Uppdatera din profilbild"
+    
+    def description(self):
+        return "Uppdatera din profilbild"
+    
+    def __cmd__(self):
+        return "update"

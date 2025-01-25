@@ -18,7 +18,7 @@ class Who_Is(Command):
                 f"Korrekt användning är: {self._usage()}")
             
     def _usage(self):
-        return "`whois @user`"
+        return f"`{self.__cmd__()} @user`"
     
     def help(self):
         return (
@@ -27,5 +27,8 @@ class Who_Is(Command):
             f"Användning: {self._usage}"
         )
     
-    def __str__(self):
-        return "`whois` (admin): Kolla en användares slack_id"
+    def description(self):
+        return "Kolla en användares slack_id"
+    
+    def __cmd__(self):
+        return "whois"

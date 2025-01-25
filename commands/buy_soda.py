@@ -13,5 +13,8 @@ class Soda(Strecka):
         4. En bra kväll
         """
     
-    def __str__(self):
-        return "`läsk`: För att köpa läsk, kort och gott"
+    def description(self):
+        return "För att köpa läsk, kort och gott"
+
+    def __cmd__(self):
+        return "läsk"

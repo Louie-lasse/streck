@@ -7,7 +7,10 @@ class Whoami(Command):
         say(f"{user_ids['slack_id']}")
     
     def help(self):
-        return "Skriver ut dit slack_id. Änvänds bara vid byte av IT-ansvarig"
+        return "Skriver ut dit slack_id. Änvänds vid byte av IT-ansvarig"
     
-    def __str__(self):
-        return "`whoami`: Skriver ut dit slack_id. Änvänds bara vid byte av IT-ansvarig"
+    def description(self):
+        return self.help()
+    
+    def __cmd__(self):
+        return "whoami"
