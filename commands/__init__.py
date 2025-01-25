@@ -16,5 +16,6 @@ from .whoami import Whoami
 from .request import Request
 from .say import Say
 from .whereis import Where_Is
+from .add import Add
 
 from .command_registry import Command_registry

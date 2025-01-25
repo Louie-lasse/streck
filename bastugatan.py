@@ -170,6 +170,7 @@ admin_command_registry.add(Strecklista(slack_client))
 admin_command_registry.add(Who_Is())
 admin_command_registry.add(Say(slack_client, CHANNEL))
 admin_command_registry.add(Where_Is())
+admin_command_registry.add(Add(slack_client))
 
 def handle_help(command_registry, arg: str, say):
     """

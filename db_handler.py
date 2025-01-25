@@ -162,3 +162,11 @@ class DatabaseHandler:
             ORDER BY skuld desc;
             """
         return self.execute_query(query, ())
+    
+    def add_user(self, code, name):
+        """
+        Adds a user to the database
+        """
+        query = "INSERT INTO users VALUES (null, ?, 1, ?, null, null, null)"
+        res = self.execute_command(query, (code, name))
+        return 0 if res <= 0 else res
