@@ -23,7 +23,7 @@ class Connect(Command):
 
         match = re.match(r"(\d+)\s*<@(\w+)>", args)
         if not match:
-            say("Fel format. Använd: `connect {db_id} <@slack_id>`")
+            say(f"Fel format. Använd: `{self.__cmd__()} <db_id> <@slack_id>`")
             return
 
         db_id, slack_id = match.groups()
