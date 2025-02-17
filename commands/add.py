@@ -36,14 +36,14 @@ class Add(Command):
 
 
     def _usage(self):
-        return (f"Usage: {self.__cmd__()} <namn> <sträckkod> <@person>\n"+
+        return (f"Användning: `{self.__cmd__()} <namn> <sträckkod> <@person>\n`"+
                 "Exempel: `add Bärra barra @Bärra`\n"+
                 "WARN! Barcode skannern är kinkig med ÅÄÖ osv. Använd enbart siffror och bokstäver uröver ÅÄÖ."+
                 "Barcodes är lite godtyckliga, bara de stämmer överens med den barcode du genererar")
 
     def help(self):
         return ("Lägger till en ny användare till streck-appen. Kopplar dem även till bastugatan.\n"+
-        f"Användning: `{self._usage()}`")
+        self._usage())
     
     def description(self):
         return "Lägger till en ny användare"
