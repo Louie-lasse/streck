@@ -24,8 +24,11 @@ class Strecka(Command):
                            f"`{self.usage()}` eller bara {self.__cmd__()} för att strecka"
                            ]))
             return
-        
-        amount = int(match.group(1)) if match.group(1) else 1
+        try:
+            amount = int(match.group(1)) if match.group(1) else 1
+        except ValueError:
+            say(f"Hmmm... `{match.group(1)}` verkar inte vara ett antal")
+            return
         important = bool(match.group(2))
 
         if amount < 1:
