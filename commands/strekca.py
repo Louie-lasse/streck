@@ -21,7 +21,7 @@ class Strecka(Command):
         match = re.match(pattern, args)
         if not match:
             say("\n".join([ f"Fattar inte helt `{args}`. Kör",
-                           f"`{self.usage()}` eller bara {self.__cmd__()} för att strecka"
+                           f"`{self.usage()}` eller bara `{self.__cmd__()}` för att strecka"
                            ]))
             return
         try:
@@ -32,10 +32,12 @@ class Strecka(Command):
         important = bool(match.group(2))
 
         if amount < 1:
-            say(f"Vafan menar du? Du kan ju inte sträcka {amount}")
+            say(f"Vafan menar du? Du kan ju inte sträcka {amount} st")
+            return
 
         if amount > A_LOT and not important:
             say(f"Är du säker på att du vill sträcka {amount} st?! Kör `{self.__cmd__()} {amount}!` för att bekräfta")
+            return
 
         price = self.db.get_price(self.product)
         if price <= 0:
