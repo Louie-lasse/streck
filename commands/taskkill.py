@@ -24,7 +24,7 @@ class TaskKill(Command):
         say("Tack för denna gången, vi ses och hörs :crown:")
 
         print("-"*8+"\nClosing Bastugatan by order of admin\n"+"-"*8)
-        os.kill(os.getppid(), signal.SIGKILL)
+        os.kill(os.getpgrp(), signal.SIGTERM)
 
     def help(self):
         return "Stänger av bastugatan från remote. Används e.x. om du vill testa att köra koden lokalt"
