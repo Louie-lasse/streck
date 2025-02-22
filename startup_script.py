@@ -1,6 +1,6 @@
 """
 This script is to start the bastugatan and streck scripts.
-Should be placed outside of this directory to prevent issues when pulling.
+This script should be located outside of this directory, but run with the context of this directory.
 """
 
 
@@ -49,7 +49,6 @@ def check_for_updates():
     print("Checking for updates...")
 
     check_update_cmd = (
-        #f"cd {repo_dir} && "
         "git fetch origin && "
         "git rev-parse HEAD > .git/current_commit && "
         "git rev-parse origin/main > .git/latest_commit && "
@@ -67,7 +66,6 @@ def check_for_updates():
     stop_script(streck)
     
     update_command = (
-        #f"cd {repo_dir} && "
         "git pull || (git merge --abort; git reset --hard)"
     )
     exit_code = os.system(update_command)
@@ -79,7 +77,7 @@ def check_for_updates():
     print("Repository updated successfully!")
 
     start_script(bg)
-    start_script(streck)
+    start_script(streck, "3")
 
 def cleanup_old_backups(days_old):
     """Deletes backups older than `days_old` days."""
@@ -119,7 +117,7 @@ atexit.register(exit_handler)
 # Start scripts on launch
 def main():
     start_script(bg)
-    start_script(streck)
+    start_script(streck, "3")
 
     while True:
         now = datetime.now()
