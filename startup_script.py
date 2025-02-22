@@ -44,7 +44,7 @@ def check_and_restart():
         print(f"Checking {name}...")
         if proc and proc.poll() is not None:  # Process has stopped
             print(f"{name} has stopped. Restarting...")
-            start_script(name)
+            start_script(name, "3" if name=="bastugatan.py" else "")
 
 def check_for_updates():
     """Stops A and B, updates repo, and restarts them."""
@@ -78,8 +78,8 @@ def check_for_updates():
     
     print("Repository updated successfully!")
 
-    start_script(bg)
-    start_script(streck, "3")
+    start_script(bg, "3")
+    start_script(streck)
 
 def cleanup_old_backups(days_old):
     """Deletes backups older than `days_old` days."""
@@ -122,8 +122,8 @@ atexit.register(exit_handler)
 
 # Start scripts on launch
 def main():
-    start_script(bg)
-    start_script(streck, "3")
+    start_script(bg, "3")
+    start_script(streck)
 
     while True:
         now = datetime.now()
