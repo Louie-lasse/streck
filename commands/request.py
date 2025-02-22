@@ -3,7 +3,7 @@ from . import Command
 
 class Request(Command):
 
-    def __init__(self, slack_client) -> None:
+    def __init__(self, slack_client):
         super().__init__()
         self._client = slack_client
 

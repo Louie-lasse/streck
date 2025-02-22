@@ -3,10 +3,10 @@ from . import Command
 
 class Command_registry():
 
-    def __init__(self) -> None:
+    def __init__(self):
         self._registry = {}
 
-    def add(self, command: Command) -> None:
+    def add(self, command: Command):
         self._registry[command.__cmd__()] = command
     
     def __iter__(self):

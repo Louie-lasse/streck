@@ -2,7 +2,7 @@ from .strekca import Strecka
 
 class Soda(Strecka):
 
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__(40)
 
     def help(self):

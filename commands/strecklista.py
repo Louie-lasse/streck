@@ -5,7 +5,7 @@ import re
 
 class Strecklista(Command):
 
-    def __init__(self, slack_client) -> None:
+    def __init__(self, slack_client):
         super().__init__()
         self.db = DatabaseHandler()
         self._client = slack_client

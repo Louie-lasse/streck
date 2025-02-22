@@ -3,7 +3,7 @@ from slack_helper import send_message, block_of
 
 class Say(Command):
 
-    def __init__(self, slack_client, channel) -> None:
+    def __init__(self, slack_client, channel):
         super().__init__()
         self._client = slack_client
         self.channel = channel

@@ -2,7 +2,7 @@ from .strekca import Strecka
 
 class Cider(Strecka):
 
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__(31)
 
     def help(self):

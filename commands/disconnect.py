@@ -5,7 +5,7 @@ from slack_helper import send_dm
 from .command import Command
 
 class Disconnect(Command):
-    def __init__(self, slack_client) -> None:
+    def __init__(self, slack_client):
         super().__init__()
         self.db = DatabaseHandler()
         self.client = slack_client

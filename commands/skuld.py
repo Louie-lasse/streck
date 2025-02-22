@@ -3,7 +3,7 @@ from db_handler import DatabaseHandler
 
 class Skuld(Command):
 
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__()
         self.db = DatabaseHandler()
 
