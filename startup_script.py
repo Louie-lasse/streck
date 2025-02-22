@@ -18,7 +18,7 @@ db_path = "streck/streck.db"
 bg = "bastugatan.py"
 streck = "streck.py"
 
-branch = "master"
+branch = "bastugatan-deployment"
 
 # Process storage
 processes = {}
