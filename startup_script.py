@@ -125,13 +125,13 @@ def main():
         now = datetime.now()
 
         # Run daily maintenance at noon
-        if now.hour == 12 and last_maintenance != now.date():
-            print("Performing daily maintenance...")
-            check_for_updates()
-            backup_database()
-            last_maintenance = now.date()
+        #if now.hour == 12 and last_maintenance != now.date():
+        print("Performing daily maintenance...")
+        check_for_updates()
+        backup_database()
+        last_maintenance = now.date()
 
-        time.sleep(30)
+        time.sleep(60)
 
 if __name__ == "__main__":
     main()
