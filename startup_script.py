@@ -44,7 +44,7 @@ def check_and_restart():
         print(f"Checking {name}...")
         if proc and proc.poll() is not None:  # Process has stopped
             print(f"{name} has stopped. Restarting...")
-            start_script(name)
+            start_script(name, "3" if name=="bastugatan.py" else "")
 
 def check_for_updates():
     """Stops A and B, updates repo, and restarts them."""
