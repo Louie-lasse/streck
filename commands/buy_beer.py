@@ -2,7 +2,7 @@ from .strekca import Strecka
 
 class Beer(Strecka):
 
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__(30)
 
     def help(self):

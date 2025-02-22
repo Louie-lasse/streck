@@ -39,20 +39,20 @@ db = DatabaseHandler()
 
 ### GENERAL HELPER FUNCTIONS ###
 
-def list_users(u) -> str:
+def list_users(u):
     """
     Given a list of users, return a formated string containing those users
     """
     return (random.choice(u) if len(u)==1
                else ", ".join(u[:-1]) + " och " + u[-1])
 
-def deltagare(users) -> str:
+def deltagare(users):
     """
     Given a list of users, return a formated string containing those users
     """
     return "" if len(users) == 0 else ("Deltagare: "+list_users(users))
 
-def get_message(users) -> str:
+def get_message(users):
     """
     Given a list of users, generate a random message
     """

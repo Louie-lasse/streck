@@ -6,7 +6,7 @@ from .update import Update
 
 class Connect(Command):
 
-    def __init__(self, slack_client) -> None:
+    def __init__(self, slack_client):
         super().__init__()
         self.db = DatabaseHandler()
         self.client = slack_client

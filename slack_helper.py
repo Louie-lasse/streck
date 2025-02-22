@@ -24,7 +24,7 @@ def get_profile_picture(slack_client, slack_id):
         return profile.get("image_512")  # Use a medium resolution image
     return None
 
-def send_message(slack_client, channel, message) -> None:
+def send_message(slack_client, channel, message):
     """
     Post a given message to slack using the slack client
     """

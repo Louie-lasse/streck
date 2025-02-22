@@ -1,4 +1,3 @@
-from abc import abstractmethod
 import re
 from db_handler import DatabaseHandler
 from . import Command
@@ -10,7 +9,7 @@ class Strecka(Command):
     Command for buying an item, specified in the constructor
     """
 
-    def __init__(self, product_id) -> None:
+    def __init__(self, product_id):
         self.product = product_id
         super().__init__()
         self.db = DatabaseHandler()
