@@ -106,7 +106,7 @@ def backup_database():
     os.system(f"cp {db_path} {backup_file}")
     print(f"Database backed up to {backup_file}")
 
-    cleanup_old_backups(0)
+    cleanup_old_backups(14)
 
 def exit_handler():
     """Stops all running scripts."""
