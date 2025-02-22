@@ -85,8 +85,6 @@ def cleanup_old_backups(days_old):
     """Deletes backups older than `days_old` days."""
     current = time.time()
     cutoff = current - days_old * 86400
-    print(f"cutoff: {cutoff}")
-    print(f"current: {current}")
 
     # creates `streck_backups` directory if it doesn't exist
     if not os.path.exists(backup_dir):
@@ -129,11 +127,11 @@ def main():
         now = datetime.now()
 
         # Run daily maintenance at noon
-        #if now.hour == 12 and last_maintenance != now.date():
-        print("Performing daily maintenance...")
-        check_for_updates()
-        backup_database()
-        last_maintenance = now.date()
+        if now.hour == 12 and last_maintenance != now.date():
+            print("Performing daily maintenance...")
+            check_for_updates()
+            backup_database()
+            last_maintenance = now.date()
 
         time.sleep(60)
 
