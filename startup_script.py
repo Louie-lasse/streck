@@ -78,8 +78,8 @@ def check_for_updates():
     
     print("Repository updated successfully!")
 
-    start_script(bg)
-    start_script(streck, "3")
+    start_script(bg, "3")
+    start_script(streck)
 
 def cleanup_old_backups(days_old):
     """Deletes backups older than `days_old` days."""
@@ -122,8 +122,8 @@ atexit.register(exit_handler)
 
 # Start scripts on launch
 def main():
-    start_script(bg)
-    start_script(streck, "3")
+    start_script(bg, "3")
+    start_script(streck)
 
     while True:
         now = datetime.now()
