@@ -71,7 +71,7 @@ class DatabaseHandler:
     def _handle_shutdown(self, signum, frame):
         """Handle shutdown signals (e.g., CTRL+C) to close the database connection."""
         print("\nShutting down db gracefully...")
-        sys.exit(0)
+        exit(0)
 
     def get_recent_users(self, n_minutes = 60):
         """
