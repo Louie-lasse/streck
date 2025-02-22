@@ -125,7 +125,7 @@ class DatabaseHandler:
         return res[0][0] if res else 0
     
     def list_users(self, n=5):
-        """
+        """ 
         Returns the `n` most recently added users.
         Default 5
         """
