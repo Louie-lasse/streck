@@ -18,6 +18,8 @@ db_path = "streck/streck.db"
 bg = "bastugatan.py"
 streck = "streck.py"
 
+branch = "master"
+
 # Process storage
 processes = {}
 last_maintenance = None
@@ -51,7 +53,7 @@ def check_for_updates():
     check_update_cmd = (
         "git fetch origin && "
         "git rev-parse HEAD > .git/current_commit && "
-        "git rev-parse origin/master > .git/latest_commit && "
+        f"git rev-parse origin/{branch} > .git/latest_commit && "
         "diff .git/current_commit .git/latest_commit"
     )
 
