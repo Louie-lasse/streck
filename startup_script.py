@@ -51,13 +51,13 @@ def check_for_updates():
     check_update_cmd = (
         "git fetch origin && "
         "git rev-parse HEAD > .git/current_commit && "
-        "git rev-parse origin/main > .git/latest_commit && "
+        "git rev-parse origin/master > .git/latest_commit && "
         "diff .git/current_commit .git/latest_commit"
     )
 
     update_code = os.system(check_update_cmd)
 
-    if update_code != 0:
+    if update_code == 0:
         print("No updates found.")
         check_and_restart()
         return
