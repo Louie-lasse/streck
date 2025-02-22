@@ -88,6 +88,10 @@ def cleanup_old_backups(days_old):
     print(f"cutoff: {cutoff}")
     print(f"current: {current}")
 
+    # creates `streck_backups` directory if it doesn't exist
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir)
+
     # List all files in the backup directory
     for filename in os.listdir(backup_dir):
         file_path = os.path.join(backup_dir, filename)
