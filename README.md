@@ -22,6 +22,19 @@ Included is a startup script for the application. This will start the full appli
 
 Move the script to any location to prevent conflicts if the script is updated.
 
+### Simple startup setup
+
+For a raspberry PI, modify `~/.config/lxsession/LXDE-pi/autostart`, adding the content:
+
+```conf
+@lxterminal --working-directory=/path/to/your/streck --command="bash -c 'sleep 5; python3 /path/to/startup_script.py'"
+@bash -c "sleep 5; chromium-browser --start-fullscreen --force-device-scale-factor=0.9 http://localhost:5000"
+```
+
+where `/path/to/your/streck` is the location of the streck directory (e.g. `/home/pi/streck`) and `/path/to/startup_script.py` is the path to the script (that has been moved out of the streck directory. e.g. `/home/pi/startup_script.py`)
+
+This is the prefered approach, as the service below has some issues. If you want to work them out you are free to.
+
 ### Create the service
 
 Create `/etc/systemd/system/streck-bot.service` with the contents
