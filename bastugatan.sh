@@ -28,4 +28,4 @@ for i in {1..15}; do
     sleep 1
 done
 
-chromium-browser --start-fullscreen --force-device-scale-factor=0.9 http://localhost:5000
+chromium-browser --start-fullscreen --incognito --force-device-scale-factor=0.9 http://localhost:5000
