@@ -46,6 +46,10 @@ sudo apt-get install xdotool
 
 To enable the application on startup, run `chmod +x /path/to/bastugatan.sh`. To disable it, run `chmod -x /path/to/bastugatan.sh`.
 
+#### Modify networks
+
+If the device running the service changes location/network, default networks may need to be configured. To do this, edit `/etc/wpa_supplicant/wpa_supplicant.conf` and add `priority=n` to each, where `n` is order of priority with highest priority being `1`.
+
 ### Usage
 
 Either have the program listen to `main`/`master`, or create a seperate branch for the program to listen to
