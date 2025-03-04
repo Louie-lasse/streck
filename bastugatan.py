@@ -174,6 +174,8 @@ admin_command_registry.add(Where_Is())
 admin_command_registry.add(Add(slack_client))
 admin_command_registry.add(TaskKill())
 
+all_commands = user_command_registry.merge(admin_command_registry)
+
 def handle_help(command_registry, arg: str, say):
     """
     Provide `help` info to the user
@@ -258,7 +260,7 @@ def handle_message(event, say, *_):
         return
 
     command_registry = (
-        user_command_registry.merge(admin_command_registry)
+        all_commands
         if user_id == ADMIN
         else user_command_registry
     )
