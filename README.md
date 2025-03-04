@@ -36,6 +36,11 @@ For a raspberry PI, modify `~/.config/lxsession/LXDE-pi/autostart`, adding the c
 
 where `/home/pi/bastugatan/script/location` is the location of shell script (e.g. `/home/pi/bastugatan.sh`).
 
+Also, the tool `xdotool` needs installation
+```sh
+sudo apt-get install xdotool
+```
+
 #### Enable/disable
 
 To enable the application on startup, run `chmod +x /path/to/bastugatan.sh`. To disable it, run `chmod -x /path/to/bastugatan.sh`.
