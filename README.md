@@ -36,9 +36,19 @@ For a raspberry PI, modify `~/.config/lxsession/LXDE-pi/autostart`, adding the c
 
 where `/home/pi/bastugatan/script/location` is the location of shell script (e.g. `/home/pi/bastugatan.sh`).
 
+Also, the tool `xdotool` needs installation
+
+```sh
+sudo apt-get install xdotool
+```
+
 #### Enable/disable
 
 To enable the application on startup, run `chmod +x /path/to/bastugatan.sh`. To disable it, run `chmod -x /path/to/bastugatan.sh`.
+
+#### Modify networks
+
+If the device running the service changes location/network, default networks may need to be configured. To do this, edit `/etc/wpa_supplicant/wpa_supplicant.conf` and add `priority=n` to each, where `n` is order of priority with highest priority being `1`.
 
 ### Usage
 

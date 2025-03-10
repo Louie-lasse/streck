@@ -29,6 +29,6 @@ for i in {1..15}; do
 done
 
 # Move mouse out of the screen
-xdotool mousemove 9999 0
+xdotool mousemove 9999 0 || echo "Failed to move mouse"
 
 chromium-browser --start-fullscreen --incognito --force-device-scale-factor=0.9 http://localhost:5000
