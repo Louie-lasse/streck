@@ -16,7 +16,7 @@ load_dotenv()
 
 from db_handler import DatabaseHandler
 from commands import *
-from slack_helper import send_dm, send_message, block_of
+from slack_helper import send_dm, send_message, block_of, send_webcam_image
 
 DEV = bool(os.getenv("DEV"))
 
@@ -122,6 +122,7 @@ def trigger_web_hook():
     reset_timer()
     text = get_message(users)
     send_message(slack_client, CHANNEL, text)
+    send_webcam_image(slack_client, CHANNEL)
 
 def on_click():
     """
