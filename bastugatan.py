@@ -2,6 +2,7 @@ import threading
 import time
 import random
 import os
+import re
 
 from pynput import keyboard
 
@@ -243,9 +244,8 @@ def handle_mention(event, say, *_):
 
 @app.event("message")
 def handle_message(event, say, *_):
+    print("REACT")
     """Main function to handle incoming Slack messages."""
-    if event["channel_type"] != "im":
-        return # ignore messages not in DM
 
     user_id = event["user"]
     db_id, name = db.get_user(user_id)
@@ -254,6 +254,15 @@ def handle_message(event, say, *_):
     parts = user_input.split(" ", 1)
     command = parts[0].lower()
     args = parts[1] if len(parts) > 1 else ""
+
+    if event["channel_type"] != "im":
+        print(event)
+        # ignore messages not in DM
+        if event["channel"] == CHANNEL:
+            if command == "öl":
+                u_message = "Ruffe ditt fyllo! " if user_id=="U04R26B8VKR" else ""
+                say(f"{u_message}Vi tar det i DM :kissing_heart:")
+        return
 
     if db_id is None:
         user_not_connected(say, command, user_id)
