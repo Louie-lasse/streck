@@ -7,3 +7,4 @@ slack_bolt==1.21.2
 aiohttp==3.11.8
 python-dotenv==1.0.1
 requests==2.32.3
+opencv==4.11.0
