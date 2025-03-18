@@ -5,7 +5,7 @@
 cd /path/to/your/streck || { echo "Failed to change directory"; exit 1; }
 
 echo "Waiting for network connection..."
-for i in {1..15}; do
+for i in {1..30}; do
     if ping -c 1 -W 1 8.8.8.8 &> /dev/null; then
         echo "Network connected!"
         break
