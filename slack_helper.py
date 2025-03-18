@@ -80,7 +80,7 @@ def countdown(steps=5):
             label.config(text=str(n))
             root.after(1000, update_countdown, n - 1)
         else:
-            label.config(text="📸")
+            label.config(text="SMILE!")
             root.after(1000, root.destroy)
 
     update_countdown(steps)
