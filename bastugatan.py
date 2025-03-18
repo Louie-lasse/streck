@@ -245,7 +245,6 @@ def handle_mention(event, say, *_):
 
 @app.event("message")
 def handle_message(event, say, *_):
-    print("REACT")
     """Main function to handle incoming Slack messages."""
 
     user_id = event["user"]
@@ -257,7 +256,6 @@ def handle_message(event, say, *_):
     args = parts[1] if len(parts) > 1 else ""
 
     if event["channel_type"] != "im":
-        print(event)
         # ignore messages not in DM
         if event["channel"] == CHANNEL:
             if command == "öl":
