@@ -1,5 +1,6 @@
 import cv2
 import tkinter as tk
+import numpy as np
 
 def send_dm(slack_client, user, message):
     """
@@ -57,8 +58,15 @@ def capture_image(save_path="webcam_image.jpg", max_camera_range=2, countdown_st
         if cap.isOpened():
             if countdown_steps:
                 countdown(countdown_steps)
-            ret, frame = cap.read()
+            for i in range(15):
+                ret, frame = cap.read()
+            
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            avg_brightness = np.mean(gray)  # Get the average brightness
+
             if ret:
+                if avg_brightness > 100:
+                    frame = adjust_gamma(frame, 0.6)
                 cv2.imwrite(save_path, frame)
             cap.release()
             return save_path if ret else None
@@ -102,3 +110,9 @@ def send_webcam_image(slack_client, channel):
     upload_response = upload_to_slack(image_path, slack_client, channel)
     if not upload_response.get("ok"):
         print("Upload failed:", upload_response)
+
+def adjust_gamma(image, gamma=0.5):
+    """ Apply gamma correction to reduce brightness issues. """
+    inv_gamma = 1.0 / gamma
+    table = np.array([(i / 255.0) ** inv_gamma * 255 for i in np.arange(0, 256)]).astype("uint8")
+    return cv2.LUT(image, table)
