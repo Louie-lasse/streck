@@ -1,6 +1,10 @@
+import os
+
 import cv2
 import tkinter as tk
 import numpy as np
+
+CALIBRATED = False
 
 def send_dm(slack_client, user, message):
     """
@@ -116,3 +120,23 @@ def adjust_gamma(image, gamma=0.5):
     inv_gamma = 1.0 / gamma
     table = np.array([(i / 255.0) ** inv_gamma * 255 for i in np.arange(0, 256)]).astype("uint8")
     return cv2.LUT(image, table)
+
+def calibrate():
+    os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+    cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+
+    cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0)
+    cap.set(cv2.CAP_PROP_EXPOSURE, -5)
+    cap.set(cv2.CAP_PROP_BRIGHTNESS, 100)
+
+    #Auto WB is off at value 1 and on at value 3
+    cap.set(cv2.CAP_PROP_AUTO_WB, 0)
+    cap.set(cv2.CAP_PROP_TEMPERATURE, 7000)
+    for i in range(100):
+        ret, frame = cap.read()
+    cap.release()
+    cv2.destroyAllWindows()
+
+if not CALIBRATED:
+    calibrate()
+    CALIBRATED = True
