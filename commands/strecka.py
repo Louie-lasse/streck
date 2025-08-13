@@ -66,8 +66,8 @@ class Strecka(Command):
                 say(f"Hmmm. Något gick fel. Kontakta <@{self._ADMIN}> om saker inte verkar funka"
                     + (f"\nSträckade {i} gånger iallafall" if i else ""))
                 return
-        say("Har streckat " +
-            (f"{amount} st" if amount > 1 else "") + " :crown:")
+        say("Har streckat" +
+            (f" {amount} st" if amount > 1 else "") + " :crown:")
 
     def usage(self):
         return f"{self.__cmd__()} [<antal>]"
