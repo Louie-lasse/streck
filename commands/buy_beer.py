@@ -1,4 +1,4 @@
-from .strekca import Strecka
+from .strecka import Strecka
 
 class Beer(Strecka):
 
