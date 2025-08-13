@@ -1,5 +1,6 @@
 from .strecka import Strecka
 
+
 class Beer(Strecka):
 
     def __init__(self):
@@ -7,9 +8,9 @@ class Beer(Strecka):
 
     def help(self):
         return "DU! Om du inte klarar av att sträcka själv får du fan inget"
-    
+
     def description(self):
         return "HUhmbrbrbrbbrbr... BÄRS!!!"
-    
+
     def __cmd__(self):
         return "öl"
