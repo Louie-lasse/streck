@@ -38,7 +38,7 @@ class Disconnect(Command):
         return f"Ta bort en användare som kopplats av misstag\n{self._usage()}"
     
     def _usage(self):
-        return f"Usage: {self.__cmd__()} <@person>\nExempel: `disconnect @Bärra"
+        return f"Usage: `{self.__cmd__()} <@person>`\nExempel: `disconnect @Bärra"`
 
     def description(self):
         return "Tar bort en användare från bastugatan (inte strecklistan)"
