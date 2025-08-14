@@ -1,6 +1,6 @@
 import re
 from db_handler import DatabaseHandler
-from . import Command
+from .. import Command
 
 A_LOT = 12
 

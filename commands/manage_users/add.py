@@ -1,7 +1,7 @@
 import re
 
 from db_handler import DatabaseHandler
-from .command import Command
+from ..command import Command
 from .connect import Connect
 
 class Add(Command):

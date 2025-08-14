@@ -1,4 +1,4 @@
-from .command import Command
+from ..command import Command
 from db_handler import DatabaseHandler
 
 class List_Users(Command):

@@ -1,5 +1,5 @@
 import re
-from . import Command
+from .. import Command
 
 class Where_Is(Command):
 

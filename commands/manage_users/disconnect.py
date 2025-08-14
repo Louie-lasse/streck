@@ -2,7 +2,7 @@ import re
 
 from db_handler import DatabaseHandler
 from slack_helper import send_dm
-from .command import Command
+from ..command import Command
 
 class Disconnect(Command):
     def __init__(self, slack_client):
@@ -38,7 +38,7 @@ class Disconnect(Command):
         return f"Ta bort en användare som kopplats av misstag\n{self._usage()}"
     
     def _usage(self):
-        return f"Usage: `{self.__cmd__()} <@person>`\nExempel: `disconnect @Bärra"`
+        return f"Usage: `{self.__cmd__()} <@person>`\nExempel: `disconnect @Bärra"
 
     def description(self):
         return "Tar bort en användare från bastugatan (inte strecklistan)"
