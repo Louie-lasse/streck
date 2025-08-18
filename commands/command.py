@@ -37,6 +37,6 @@ class Command(ABC):
     @abstractmethod
     def __cmd__(self):
         """
-        The command name. The accutal command used by the user
+        The command name. The actual command used by the user
         """
         pass

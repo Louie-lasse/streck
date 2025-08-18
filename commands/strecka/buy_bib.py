@@ -2,8 +2,7 @@ from .strecka import Strecka
 
 class Bib(Strecka):
     def __init__(self):
-        super().__init__(0, 0.5)
-        # todo replace `0` with the actual product ID for bibsprit
+        super().__init__(41, price_factor=0.5)
 
     def help(self):
         return "Antal cl bibsprit du vill sträcka. "\

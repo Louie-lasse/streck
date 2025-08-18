@@ -165,6 +165,7 @@ user_command_registry.add(Skuld())
 user_command_registry.add(Whoami())
 user_command_registry.add(Request(slack_client))
 user_command_registry.add(Strecklista(slack_client))
+user_command_registry.add(Prislista())
 
 admin_command_registry = Command_registry()
 admin_command_registry.add(List_Users())

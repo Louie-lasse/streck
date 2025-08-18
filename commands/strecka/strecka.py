@@ -1,6 +1,7 @@
 import re
 from db_handler import DatabaseHandler
 from .. import Command
+from .prislista import Prislista
 
 A_LOT = 12
 
@@ -15,6 +16,7 @@ class Strecka(Command):
         super().__init__()
         self.db = DatabaseHandler()
         self.price_factor = price_factor
+        Prislista.add_product(self)
 
     def _get_amount(self, args: str, say):
         pattern = r'^(\d+)?(!)?$'

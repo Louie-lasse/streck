@@ -2,8 +2,7 @@ from .strecka import Strecka
 
 class FinSprit(Strecka):
     def __init__(self):
-        super().__init__(0, 0.5)
-        # todo replace `0` with the actual product ID for FinSprit
+        super().__init__(42, 0.5)
 
     def help(self):
         return "Antal cl finsprit du vill sträcka. "\
