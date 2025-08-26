@@ -1,4 +1,4 @@
-from .. import Command
+from ..command import Command
 import re
 from db_handler import DatabaseHandler
 from slack_helper import send_dm

@@ -1,5 +1,5 @@
 from typing import Mapping
-from . import Command
+from .command import Command
 
 class Command_registry():
 
