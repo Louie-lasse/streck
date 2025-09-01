@@ -4,6 +4,8 @@
 # Change to the working directory where your Python script is located
 cd /path/to/your/streck || { echo "Failed to change directory"; exit 1; }
 
+lxterminal -e "bash -c 'python streck.py; exec bash'" &
+
 echo "Waiting for network connection..."
 for i in {1..30}; do
     if ping -c 1 -W 1 8.8.8.8 &> /dev/null; then
@@ -14,9 +16,7 @@ for i in {1..30}; do
     sleep 1
 done
 
-# Launch the Python script in a terminal window.
-echo "Starting scripts"
-lxterminal -e "bash -c 'python3 /path/to/startup_script.py; exec bash'" &
+lxterminal -e "bash -c 'python3 bastugatan.py; exec bash'" &
 
 echo "Waiting for scripts to start..."
 for i in {1..15}; do
@@ -28,7 +28,6 @@ for i in {1..15}; do
     sleep 1
 done
 
-# Move mouse out of the screen
 xdotool mousemove 9999 9999 || echo "Failed to move mouse"
 
 chromium-browser --start-fullscreen --incognito --force-device-scale-factor=0.9 http://localhost:5000
