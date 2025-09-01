@@ -1,5 +1,5 @@
 from slack_helper import send_dm
-from . import Command
+from ..command import Command
 
 class Request(Command):
 

@@ -1,6 +1,6 @@
 import re
 from db_handler import DatabaseHandler
-from .. import Command
+from ..command import Command
 from .prislista import Prislista
 
 A_LOT = 12

@@ -1,4 +1,4 @@
-from .. import Command
+from ..command import Command
 from slack_helper import send_message, block_of
 
 class Say(Command):

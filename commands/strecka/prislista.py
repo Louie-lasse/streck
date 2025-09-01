@@ -1,12 +1,11 @@
-from .. import Command
-from .strecka import Strecka
+from ..command import Command
 
 class Prislista(Command):
 
     __products = {}
 
     @staticmethod
-    def add_product(product: Strecka):
+    def add_product(product):
         Prislista.__products[product.__cmd__()] = product
 
     def execute(self, user_ids, args: str, say):

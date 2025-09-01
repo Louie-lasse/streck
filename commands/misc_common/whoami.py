@@ -1,5 +1,4 @@
-
-from . import Command
+from ..command import Command
 
 class Whoami(Command):
 
