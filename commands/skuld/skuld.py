@@ -1,4 +1,4 @@
-from . import Command
+from ..command import Command
 from db_handler import DatabaseHandler
 
 class Skuld(Command):

@@ -1,4 +1,4 @@
-from .strekca import Strecka
+from .base_strecka import Strecka
 
 class Soda(Strecka):
 

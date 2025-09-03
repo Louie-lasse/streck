@@ -1,5 +1,5 @@
 import re
-from . import Command
+from ..command import Command
 
 class Who_Is(Command):
 

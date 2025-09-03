@@ -1,5 +1,5 @@
 import re
-from . import Command
+from ..command import Command
 
 class Where_Is(Command):
 
@@ -18,13 +18,13 @@ class Where_Is(Command):
     
     def help(self):
         return (
-            "Skriver ut en kannals id." +
+            "Skriver ut en kanals id." +
             "Används e.x. om man vill ändra vilka kannaler bastugatan bor i." +
             f"Användning: {self._usage}"
         )
     
     def description(self):
-        return "Kolla en kannals id"
+        return "Kolla en kanals id"
     
     def __cmd__(self):
         return "whereis"

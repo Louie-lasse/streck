@@ -2,7 +2,7 @@ import requests
 
 from db_handler import DatabaseHandler
 from slack_helper import get_profile_picture
-from . import Command
+from ..command import Command
 
 class Update(Command):
     """

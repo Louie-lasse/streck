@@ -14,27 +14,22 @@ Either, run `streck.py` and `bastugatan.py` for streck and bastugatan respective
 
 ## Startup script
 
-Included is a startup script for the application. This will start the full application on boot (assuming the below steps are followed). Every day at 12:00 the script will
-
-1. Make a backup of the database, for a maximum of 14. Older backups are removed
-2. Check if any application has crashed, if so: restart it.
-3. Check for updates on the detailed branch. If updates are present, pull them and restart the application
-
+Included is a startup script for the application. This will start the full application on boot (assuming the below steps are followed).
 ## Setting up the service
 
 ### Copy scripts
 
-Copy the python script `startup_script.py` to any location to prevent conflicts if the script is updated. Also copy the shell script `bastugatan.sh` (note: not `bastugatan.py`).
+Copy the shell script `bastugatan.py` to any location to prevent conflicts if the script is updated.
 
 ### Simple startup setup
 
 For a raspberry PI, modify `~/.config/lxsession/LXDE-pi/autostart`, adding the content:
 
 ```conf
-@lxterminal -e /home/pi/bastugatan/script/location
+@lxterminal -e /home/pi/bastugatan/script/location.sh
 ```
 
-where `/home/pi/bastugatan/script/location` is the location of shell script (e.g. `/home/pi/bastugatan.sh`).
+where `/home/pi/bastugatan/script/location.sh` is the location of shell script (e.g. `/home/pi/bastugatan.sh`).
 
 Also, the tool `xdotool` needs installation
 
@@ -49,7 +44,3 @@ To enable the application on startup, run `chmod +x /path/to/bastugatan.sh`. To 
 #### Modify networks
 
 If the device running the service changes location/network, default networks may need to be configured. To do this, edit `/etc/wpa_supplicant/wpa_supplicant.conf` and add `priority=n` to each, where `n` is order of priority with highest priority being `1`.
-
-### Usage
-
-Either have the program listen to `main`/`master`, or create a seperate branch for the program to listen to

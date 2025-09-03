@@ -1,5 +1,5 @@
 from slack_helper import send_dm
-from . import Command
+from ..command import Command
 from db_handler import DatabaseHandler
 import re
 
