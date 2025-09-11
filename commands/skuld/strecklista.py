@@ -11,11 +11,11 @@ class Strecklista(Command):
         self._client = slack_client
 
     def execute(self, user_ids, args: str, say):
-        all = self.db.get_all_debts()
+        all_debts = self.db.get_all_debts()
         res = [v for v in
                filter(
                 lambda x: int(x[2]) > 0,
-                all
+                all_debts
             )
         ]
         width = max(len(f"<@{r[1]}>" if r[1] else r[0]) for r in res)
@@ -45,6 +45,6 @@ Detta är tänkt att hjälpa kaffekassaansvarig med att kassera ut kaffekassan""
 
     def description(self):
         return "Se hur nuvarande strecklistan ser ut"
-    
+
     def __cmd__(self):
         return "strecklista"

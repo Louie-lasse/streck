@@ -178,6 +178,7 @@ admin_command_registry.add(Say(slack_client, CHANNEL))
 admin_command_registry.add(Where_Is())
 admin_command_registry.add(Add(slack_client))
 admin_command_registry.add(TaskKill())
+admin_command_registry.add(Tom(slack_client))
 
 all_commands = user_command_registry.merge(admin_command_registry)
 
