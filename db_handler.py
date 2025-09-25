@@ -2,6 +2,7 @@ import sqlite3
 import signal
 import sys
 from datetime import datetime, timedelta, timezone
+import re
 
 class DatabaseHandler:
     """A class to manage SQLite database interactions using a context manager."""
@@ -10,6 +11,7 @@ class DatabaseHandler:
         """Initialize the database handler with the database file path."""
         self.db_path = db_path
         self.conn, self.cursor = None, None
+        self.p = re.compile(r'.{3}n{2}$',)
 
         signal.signal(signal.SIGINT, self._handle_shutdown)
         signal.signal(signal.SIGTERM, self._handle_shutdown)
@@ -81,9 +83,11 @@ class DatabaseHandler:
         query = "SELECT name FROM Transactions JOIN Users U on user=U.id WHERE added >= ? GROUP BY name"
         time_span_utc = datetime.now(timezone.utc) - timedelta(minutes=n_minutes)
         time_span_str = time_span_utc.strftime('%Y-%m-%d %H:%M:%S')
-        res = self.execute_query(query, (time_span_str,))
-        return res or []
-    
+        return [r for r in
+            self.execute_query(query, (time_span_str,))
+            if not self.p.match(r[0])
+            ] or []
+
     def get_user(self, slack_id):
         """
         Gets the users actual database id for identification and interaction with the database
