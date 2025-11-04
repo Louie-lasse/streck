@@ -49,7 +49,7 @@ class Betala(Command):
         send_dm(
             self._client,
             slack_id,
-            f"Din skuld har minskats med {amount} kr av <@{user_ids["slack_id"]}>. Du är nu skylldig {skuld - amount} kr."
+            f"Din skuld har minskats med {amount} kr av <@{user_ids['slack_id']}>. Du är nu skylldig {skuld - amount} kr."
         )
 
     def usage(self):
