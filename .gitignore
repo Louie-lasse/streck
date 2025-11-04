@@ -1,7 +1,5 @@
 *.py[co]
 
-.env
-
 # Packages
 *.egg
 *.egg-info
@@ -43,3 +41,7 @@ streck/streck.db
 streck/pictures
 oldstreck/
 streck_backups/
+
+# Bastugatan local data
+webcam_image.jpg
+.env
