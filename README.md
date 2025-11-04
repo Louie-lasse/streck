@@ -8,6 +8,14 @@ Bastugatan is an application built to work in parallel with `streck`. To use it,
 
 To find your slack_id, simply dm `whoami` to the bot
 
+## Simple maintainance for raspberry pi
+
+If you are having basic issues, here are some tips:
+
+- Google around to find how to navigate the system with a terminal. `ls` and `cd` are your best friends.
+- To edit the `.env` file, use `mousepad .env`
+- Reach out to Bärra if you have any issues.
+
 ## How to run
 
 Either, run `streck.py` and `bastugatan.py` for streck and bastugatan respectively. Alternatively, you can run the `startup_script.py`
@@ -15,6 +23,7 @@ Either, run `streck.py` and `bastugatan.py` for streck and bastugatan respective
 ## Startup script
 
 Included is a startup script for the application. This will start the full application on boot (assuming the below steps are followed).
+
 ## Setting up the service
 
 ### Copy scripts
