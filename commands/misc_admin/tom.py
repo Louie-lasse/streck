@@ -40,9 +40,11 @@ class Tom(Command):
         Clears the debt of a user
         """
         debt = self.db.get_debt(user_id)
-        if debt is None or debt <= 0:
+        if debt is None:
             say(f"<@{slack_id}> har ingen skuld")
             return
+        if debt <= 0:
+            say(f"<@{slack_id}> du verkar vara skyldig <@{slack_id}> pengar. \nDu ska swisha dom {debt}.")
         changes = self.db.purchase(user_id, None, -debt, paid=True)
         if changes <= 0:
             say(f"Något gick fel när skulden för <@{slack_id}> skulle nollställas")

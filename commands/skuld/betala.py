@@ -12,7 +12,7 @@ class Betala(Command):
         self.db = DatabaseHandler()
 
     def execute(self, user_ids, args: str, say):
-        pattern = r'^<@([A-Z0-9]+)> (\d+)( !)?$'
+        pattern = r'^<@([A-Z0-9]+)> (\d+) ?(!)?$'
         match = re.match(pattern, args)
         if not match:
             say("\n".join([f"Fattar inte helt `{args}`. Kör",
@@ -20,13 +20,14 @@ class Betala(Command):
                            ]))
             return
 
+        skuld = None
         try:
             slack_id = match.group(1)
             db_id = self.db.get_user(slack_id)[0]
             skuld = self.db.get_debt(db_id)
-        except Exception as e:
+        except Exception:
             pass
-        if not skuld:
+        if skuld is None:
             say(f"Något gick fel :pensive:. Är du säker på att <@{match.group(1)}> är inlaggd?")
             return
 

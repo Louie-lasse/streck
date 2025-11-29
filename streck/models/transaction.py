@@ -18,7 +18,11 @@ class Transaction(object):
 			self.special = 'undo'
 		if paid:
 			self.special = 'paid'
-			self.price = -u.debt()
+			debt = u.debt()
+			if debt > 0:
+				self.price = -u.debt()
+			else:
+				self.price = 0
 
 	def perform(self):
 		if self.special == 'undo':
