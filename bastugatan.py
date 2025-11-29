@@ -277,7 +277,12 @@ def handle_message(event, say, *_):
         if user_id == ADMIN
         else user_command_registry
     )
-
+    if DEV:
+        say("\n".join([
+            "Kör i dev-läge just nu, alltså inte på riktigt.",
+            "Dina kommandon kommer inte göra nåt.",
+            f"Skriv till <@{ADMIN}> om du har frågor."
+        ]))
     if command == "help":
         handle_help(command_registry, args, say)
         return
