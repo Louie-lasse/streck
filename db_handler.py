@@ -116,7 +116,7 @@ class DatabaseHandler:
         """
         Adds a transaction to a user
         """
-        query = 'INSERT into transactions values (null, datetime("now", "-1 day"), ?, ?, ?, ?)'
+        query = 'INSERT into transactions values (null, datetime("now"), ?, ?, ?, ?)'
         res = self.execute_command(query, (db_id, product, price, 'paid' if paid else ''))
         return 0 if res <= 0 else res
     
