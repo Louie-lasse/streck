@@ -22,9 +22,9 @@ class Command_registry():
         return key in self._registry
     
     def __str__(self):
-        return '\n'.join([
+        return '\n'.join(sorted([
             f"- {command}" for command in self._registry.values()
-        ])
+        ]))
     
     def __repr__(self):
         return self.__str__()
