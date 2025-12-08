@@ -23,7 +23,7 @@ class Avverkare(Command):
             days = self.default_days
         else:
             try:
-                days = int(match.group(1)) if match.group(1) else int(365/4)
+                days = int(match.group(1)) if match.group(1) else self.default_days
             except ValueError:
                 say(f"Hmmm... `{match.group(1)}` verkar inte vara ett antal dagar")
                 return
