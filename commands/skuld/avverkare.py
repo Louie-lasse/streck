@@ -9,6 +9,7 @@ class Avverkare(Command):
     
     def __init__(self):
         super().__init__()
+        self.default_days = 90
         self.db = DatabaseHandler()
         self.ids = [Beer.product_id, Cider.product_id]
     
@@ -19,7 +20,7 @@ class Avverkare(Command):
         pattern = r'^(\d+)?$'
         match = re.match(pattern, args)
         if not match:
-            days = int(365/4)
+            days = self.default_days
         else:
             try:
                 days = int(match.group(1)) if match.group(1) else int(365/4)
@@ -41,7 +42,8 @@ class Avverkare(Command):
     def help(self):
         return "\n".join([
             "Används för att kolla hur mycket folk druckit",
-            f"Användning: {self._usage()} <antal dagar>"
+            f"Användning: {self._usage()}",
+            f"Eller bara {self.__cmd__()} för att kolla de senaste {self.default_days} dagarna"
         ])
 
     def _usage(self):
