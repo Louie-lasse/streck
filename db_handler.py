@@ -88,6 +88,16 @@ class DatabaseHandler:
             if not self.p.match(r[0])
             ] or []
 
+    def get_recent_transactions(self, product_ids, n_days=90):
+        query = " ".join([
+            "SELECT U.name, count(*) as amount FROM Transactions T",
+            "JOIN Users U on T.user=U.id",
+            f"WHERE T.added >= datetime('now', -{n_days} days)",
+            f"AND T.product IN ({','.join(['?']*len(product_ids))})",
+            "GROUP BY U.name ORDER BY amount DESC LIMIT 10"
+        ])
+        return self.execute_query(query)
+
     def get_user(self, slack_id):
         """
         Gets the users actual database id for identification and interaction with the database

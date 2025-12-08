@@ -2,8 +2,10 @@ from .base_strecka import Strecka
 
 class Cider(Strecka):
 
+    product_id = 31
+
     def __init__(self):
-        super().__init__(31)
+        super().__init__(Cider.product_id)
 
     def help(self):
         return (

@@ -3,8 +3,10 @@ from .base_strecka import Strecka
 
 class Beer(Strecka):
 
+    product_id = 30
+
     def __init__(self):
-        super().__init__(30)
+        super().__init__(Beer.product_id)
 
     def help(self):
         return "DU! Om du inte klarar av att sträcka själv får du fan inget"

@@ -157,6 +157,7 @@ def on_release(key):
 ### CLI FUNCTIONS ###
 
 user_command_registry = Command_registry()
+user_command_registry.add(Avverkare())
 user_command_registry.add(Beer())
 user_command_registry.add(Cider())
 user_command_registry.add(Soda())
