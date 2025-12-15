@@ -45,12 +45,12 @@ class Betala(Command):
                 return
 
         self.db.purchase(db_id, None, -amount, paid=True)
-        say(f"Ändrat skulden för <@{slack_id}> med {amount} kr. De är nu skylldiga {skuld - amount} kr.")
+        say(f"Ändrat skulden för <@{slack_id}> med {amount} kr. De är nu skyldiga {skuld - amount} kr.")
 
         send_dm(
             self._client,
             slack_id,
-            f"Din skuld har minskats med {amount} kr av <@{user_ids['slack_id']}>. Du är nu skylldig {skuld - amount} kr."
+            f"Din skuld har minskats med {amount} kr av <@{user_ids['slack_id']}>. Du är nu skyldig {skuld - amount} kr."
         )
 
     def usage(self):

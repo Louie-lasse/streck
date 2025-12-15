@@ -30,8 +30,8 @@ class SSH(Command):
             return
         say("\n".join([
             "För att ansluta till servern via SSH, kör `ssh remote@raspberrypi`",
-            "Lösenorder finns på drive."
-            f"Om något strular, kör `{self.__cmd__()} help` för mer info."
+            "Lösenorder finns på drive.",
+            f"Om något strular, kör `{self.__cmd__()} help` för mer info.",
             f"För att gå med i Tailscale-nätverket, använd länken: {self.ts_url}{self.link_key}"
         ]))
     
@@ -41,7 +41,9 @@ class SSH(Command):
             "Håll inte på här om du inte vet vad du gör!",
             "För att ansluta behöver du först skaffa tailscale, och gå med i nätverket via länken",
             f"{self.ts_url}{self.link_key}",
-            "När du är ansluten kan du köra `ssh remote@raspberrypi` för att ansluta till servern.",
+            "Efter att du har loggat in, om den frågar om den ber dig lägga till fler enheter, leta efter en 'skip' knapp.",
+            "När du är tillagd, kör `tailscale status` och hitta `raspberrypi.tailXYZ.ABCD`",
+            "Kör sedan `ssh remote@raspberrypi.tailXYZ.ABCD` för att ansluta till servern.",
             "Lösenord finns på drive.",
             "Väl inne kan du komma åt databasen `sqlite3 adressen/till/databasen.db`",
             "Starta om allt `reboot`",
