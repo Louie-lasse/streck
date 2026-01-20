@@ -11,11 +11,10 @@ class Strecka(Command):
     Command for buying an item, specified in the constructor
     """
 
-    def __init__(self, product_id, price_factor=1):
+    def __init__(self, product_id):
         self.product = product_id
         super().__init__()
         self.db = DatabaseHandler()
-        self.price_factor = price_factor
         Prislista.add_product(self)
 
     def _get_amount(self, args: str, say):
@@ -47,9 +46,7 @@ class Strecka(Command):
 
     def get_price(self):
         price = self.db.get_price(self.product)
-        if price <= 0:
-            return 0
-        return price * self.price_factor
+        return max(price, 0)
 
     def execute(self, user_ids, args: str, say):
         amount = self._get_amount(args, say)
