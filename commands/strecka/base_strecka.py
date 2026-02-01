@@ -4,6 +4,7 @@ from ..command import Command
 from .prislista import Prislista
 
 A_LOT = 12
+A_FUCK_TON = 100
 
 
 class Strecka(Command):
@@ -34,6 +35,14 @@ class Strecka(Command):
 
         if amount < 1:
             say(f"Vafan menar du? Du kan ju inte sträcka {amount} st")
+            return
+
+        if amount >= A_FUCK_TON:
+            say("\n".join([
+                f"BROR, du ska inte dricka {amount} {self.__cmd__()}.",
+                "Om du ser det här har du försökt göra dumma saker.",
+                "Sluta med det :clown:",
+            ]))
             return
 
         if amount > A_LOT and not important:
