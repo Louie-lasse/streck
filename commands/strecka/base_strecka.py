@@ -19,7 +19,7 @@ class Strecka(Command):
         Prislista.add_product(self)
 
     def _get_amount(self, args: str, say):
-        pattern = r'^(\d+)?(!)?$'
+        pattern = r'^(\d+)? ?(!)?$'
         match = re.match(pattern, args)
         if not match:
             say("\n".join([f"Fattar inte helt `{args}`. Kör",
@@ -48,7 +48,7 @@ class Strecka(Command):
         if amount > A_LOT and not important:
             say(
                 f"Är du säker på att du vill sträcka {amount} st?!"\
-                    "Kör `{self.__cmd__()} {amount}!` för att bekräfta")
+                    f"Kör `{self.__cmd__()} {amount}!` för att bekräfta")
             return
 
         return amount
