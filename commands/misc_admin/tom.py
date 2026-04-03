@@ -28,10 +28,8 @@ class Tom(Command):
                 res.append((db_user[0], uid))
                 continue
             if all([c.isdigit() for c in uid]):
-                slack_id = self.db.get_slack_id(uid)
-                if slack_id:
-                    res.append((int(uid), slack_id))
-                    continue
+                res.append((int(uid), None))
+                continue
             say(f"<@{uid}> är inte kopplad till något konto")
 
         if not res:
@@ -44,6 +42,8 @@ class Tom(Command):
         """
         Clears the debt of a user
         """
+        if slack_id is None:
+            slack_id = user_id
         debt = self.db.get_debt(user_id)
         if debt is None:
             say(f"<@{slack_id}> har ingen skuld")
@@ -55,6 +55,9 @@ class Tom(Command):
             say(f"Något gick fel när skulden för <@{slack_id}> skulle nollställas")
             return
         say(f"Skulden för <@{slack_id}> har nollställts ({debt} kr)")
+        if slack_id == user_id:
+            say(f"{user_id} verkar inte vara kopplad till slack, så kan inte berätta för hen att skulden nollställts")
+            return
         send_dm(self.slack_client, slack_id, f"Din skuld har nollställts av <@{self._ADMIN}>.\n"\
             f"Du hade en skuld på {debt}")
 

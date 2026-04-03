@@ -106,14 +106,6 @@ class DatabaseHandler:
         res = self.execute_query(query, (slack_id,))
         return res[0] if res else (None,None)
 
-    def get_slack_id(self, db_id):
-        """
-        Gets the slack id of a user from the database id
-        """
-        query = "SELECT slack_id FROM Users U where id=?"
-        res = self.execute_query(query, (db_id,))
-        return res[0][0] if res else None
-    
     def get_user_by_barcode(self, barcode):
         """
         Gets the users actual database id for identification and interaction with the database
