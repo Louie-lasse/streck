@@ -79,3 +79,7 @@ class Strecka(Command):
 
     def usage(self):
         return f"{self.__cmd__()} [<antal>]"
+    
+    def change_price(self, price):
+        return self.db.update_product_price(self.product, price)
+

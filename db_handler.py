@@ -200,3 +200,12 @@ class DatabaseHandler:
         query = "INSERT INTO users VALUES (null, ?, 1, ?, null, null, null)"
         res = self.execute_command(query, (code, name))
         return 0 if res <= 0 else res
+    
+    def update_product_price(self, product, price):
+        """
+        updates the price of a product
+        """
+        q = "UPDATE products SET price=? WHERE id = ?"
+        res = self.execute_command(q, (product, price))
+
+        return res
