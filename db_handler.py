@@ -208,4 +208,4 @@ class DatabaseHandler:
         q = "UPDATE products SET price=? WHERE id = ?"
         res = self.execute_command(q, (product, price))
 
-        return res
+        return 0 if res <= 0 else res
