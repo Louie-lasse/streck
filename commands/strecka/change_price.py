@@ -21,7 +21,7 @@ class ChangePrice(Command):
             return
         
         # kollar att produkten finns
-        products = Prislista.__products
+        products = Prislista._products
         if not product in products:
             say(f"'{product}' verkar inte vara nått vi har hemma! Produkten finns inte.")
             return
