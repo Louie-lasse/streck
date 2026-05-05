@@ -5,10 +5,10 @@ import re
 class ChangePrice(Command):
 
     def execute(self, user_ids, args: str, say):
-        pattern = r'^(\w+) (\d)$'
+        pattern = r'^(\w+) (\d+)$'
         match = re.match(pattern, args)
         if not match:
-            say("\n".join([f"Fattar inte helt `{args}`.",
+            say("\n".join([f"Fattar inte va du snackar om, formatera korrekt tack!.",
                            f"{self.help()}"
                            ]))
             return
@@ -31,7 +31,7 @@ class ChangePrice(Command):
             return
 
         success = products[product].change_price(price)
-        
+
         if success:
             say(f"Löst! Tråkigt med inflation.")
         else:
