@@ -8,8 +8,8 @@ class ChangePrice(Command):
         pattern = r'^(\w+) (\d+)$'
         match = re.match(pattern, args)
         if not match:
-            say("\n".join([f"Fattar inte va du snackar om, formatera korrekt tack!.",
-                           f"{self.help()}"
+            say("\n".join([f"Fattar inte va du snackar om",
+                           f"{self.usage()}"
                            ]))
             return
         product, price = match.group(1), match.group(2)
@@ -38,10 +38,13 @@ class ChangePrice(Command):
             say(f"Något gick fel, beklagar!")
     
     def help(self):
-        return "Ändrar priset på en produkt!"
+        return self.usage()
+
+    def usage(self):
+        return f"`{self.__cmd__()} <produkt> <pris>`\nExample: `{self.__cmd__()} öl 10`"
     
     def description(self):
-        return self.help()
+        return "Ändrar priset på en produkt!"
     
     def __cmd__(self):
         return "prisändring"
