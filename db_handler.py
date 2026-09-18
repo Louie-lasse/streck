@@ -209,3 +209,46 @@ class DatabaseHandler:
         res = self.execute_command(q, (price, product))
 
         return 0 if res <= 0 else res
+
+    def list_asps(self):
+        """
+        Returns all registered asps as (barcode, name) tuples.
+        """
+        query = " ".join([
+            "SELECT U.barcode, id FROM asps A",
+            "JOIN users U ON A.id = U.id",
+        ])
+        return self.execute_query(query) or []
+
+    def add_asp(self, user_id):
+        """
+        Registers an existing user (by db id) as an asp.
+        Returns the asp's pretty name (barcode), or None if the user
+        doesn't exist or is already registered.
+        """
+        row = self.execute_query("SELECT barcode FROM users WHERE id = ?", (user_id,))
+        if not row:
+            return None
+        res = self.execute_command("INSERT INTO asps (id) VALUES (?)", (user_id,))
+        return row[0][0] if res > 0 else None
+
+    def remove_asp(self, pretty_name):
+        """
+        Unregisters an asp given its pretty name (barcode).
+        Returns the number of rows removed.
+        """
+        query = "DELETE FROM asps WHERE id = (SELECT id FROM users WHERE barcode = ?)"
+        return self.execute_command(query, (pretty_name,))
+
+    def get_asp_user_id(self, pretty_name):
+        """
+        Resolves an asp's pretty name (barcode) to the underlying user's db id.
+        Returns None if no such asp is registered.
+        """
+        query = " ".join([
+            "SELECT U.id FROM asps A",
+            "JOIN users U ON A.id = U.id",
+            "WHERE U.barcode = ?",
+        ])
+        res = self.execute_query(query, (pretty_name,))
+        return res[0][0] if res else None

@@ -8,6 +8,10 @@ class Prislista(Command):
     def add_product(product):
         Prislista._products[product.__cmd__()] = product
 
+    @staticmethod
+    def get_products():
+        return {k: v for k, v in Prislista._products.items()}
+
     def execute(self, user_ids, args: str, say):
         if not Prislista._products:
             say("Det finns inga produkter i prislistan.")

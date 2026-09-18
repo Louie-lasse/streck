@@ -35,6 +35,10 @@ create table transactions (
 	foreign key(user) references user(id),
 	foreign key(product) references product(id)
 );
+create table asps (
+	id integer primary key,
+	foreign key(id) references users(id)
+);
 insert into categories values (null, "Öl");
 insert into categories values (null, "Ickeöl");
 insert into users values (null, "Jobbmat", 1, "Jobbmat", null, "Jobbmatskonto");
