@@ -1,14 +1,16 @@
 # asp.py
 from ..command import Command
 from ..command_registry import Command_registry
-from .asp_subcommands import AspList, AspAdd, AspRemove, AspTom
+from .asp_commands import AspList, AspAdd, AspRemove, AspTom
 from ..strecka.prislista import Prislista
+from db_handler import DatabaseHandler
 
 class Asp(Command):
     def __init__(self):
         self.db = DatabaseHandler()
         self.products = Prislista.get_products()
         self._registry = Command_registry()
+        db = self.db
         for cmd in (AspList(db), AspAdd(db), AspRemove(db), AspTom(db)):
             self._registry.add(cmd)
 

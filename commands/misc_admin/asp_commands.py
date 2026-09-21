@@ -1,5 +1,5 @@
 # asp_subcommands.py
-from .command import Command
+from ..command import Command
 
 
 class AspList(Command):
