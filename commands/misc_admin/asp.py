@@ -15,8 +15,8 @@ class Asp(Command):
             self._registry.add(cmd)
 
     def execute(self, user_ids, args, say):
-        if user_ids["slack_id"] != self._ADMIN:
-            say("Not authorized.")
+        if not args:
+            say(self.help())
             return
 
         sub, _, rest = args.strip().partition(" ")
@@ -44,7 +44,8 @@ class Asp(Command):
 
     def help(self):
         return (
-            "`asp <subcommand>` — manage/act on behalf of asps.\n"
+            "`asp <subcommand>` hanterar aspar.\n"
+            "Kör `asp <subcommand> help` för mer information.\n"
             f"{self._registry}\n" + 
             ("\n").join(["`asp "+product.usage()+"`" for product in self.products])
         )
