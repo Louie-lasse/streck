@@ -66,6 +66,43 @@ class AspRemove(Command):
     def __cmd__(self):
         return "remove"
 
+class AspSkuld(Command):
+    def __init__(self, db):
+        self.db = db
+
+    def execute(self, user_ids, args, say):
+        asp_name = args.strip()
+        if not asp_name:
+            say(self.usage())
+            return
+        real_id = self.db.get_asp_user_id(asp_name)
+        if real_id is None:
+            say(f"{asp_name} är inte en registrerad asp.")
+            return
+        debt = self.db.get_debt(real_id)
+        if debt is None:
+            say(f"Lyckades inte hämta skulden för {asp_name} :pensive:")
+            return
+        if debt == 0:
+            say(f"{asp_name} har ingen skuld :tada:")
+            return
+        if debt < 0:
+            say(f"{asp_name} har ett positivt saldo på {-debt} kr :moneybag:")
+            return
+        say(f"{asp_name} är skyldig {debt} kr")
+    
+    def usage(self):
+        return "`asp skuld <asp_name>`"
+    
+    def help(self):
+        return self.usage() + ": " + self.description()
+
+    def description(self):
+        return "Töm en asps skuld"
+
+    def __cmd__(self):
+        return "skuld"
+
 
 class AspTom(Command):
     def __init__(self, db):
@@ -77,9 +114,9 @@ class AspTom(Command):
             say("Användning: `asp tom <asp_name>`")
             return
         real_id = self.db.get_asp_user_id(asp_name)
-        self.empty_balance(asp_name, real_id)
+        self.empty_balance(asp_name, real_id, say)
 
-    def empty_balance(self, name, user_id):
+    def empty_balance(self, name, user_id, say):
         debt = self.db.get_debt(user_id)
         if debt is None:
             say(f"{name} har ingen skuld")

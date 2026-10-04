@@ -215,7 +215,7 @@ class DatabaseHandler:
         Returns all registered asps as (barcode, name) tuples.
         """
         query = " ".join([
-            "SELECT U.barcode, id FROM asps A",
+            "SELECT U.barcode, A.id FROM asps A",
             "JOIN users U ON A.id = U.id",
         ])
         return self.execute_query(query) or []

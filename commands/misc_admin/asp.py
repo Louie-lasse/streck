@@ -1,7 +1,7 @@
 # asp.py
 from ..command import Command
 from ..command_registry import Command_registry
-from .asp_commands import AspList, AspAdd, AspRemove, AspTom
+from .asp_commands import AspList, AspAdd, AspRemove, AspSkuld, AspTom
 from ..strecka.prislista import Prislista
 from db_handler import DatabaseHandler
 
@@ -11,11 +11,11 @@ class Asp(Command):
         self.products = Prislista.get_products()
         self._registry = Command_registry()
         db = self.db
-        for cmd in (AspList(db), AspAdd(db), AspRemove(db), AspTom(db)):
+        for cmd in (AspList(db), AspAdd(db), AspRemove(db), AspSkuld(db), AspTom(db)):
             self._registry.add(cmd)
 
     def execute(self, user_ids, args, say):
-        if not args:
+        if not args or args.strip() == "help":
             say(self.help())
             return
 
@@ -24,7 +24,7 @@ class Asp(Command):
 
         if sub in self._registry: # predefined subcommands win over product names
             self._registry[sub].execute(user_ids, rest, say)
-        elif sub in self.prislista._products:
+        elif sub in self.products:
             self._buy(user_ids, sub, rest, say)
         else:
             say(f"Unknown asp subcommand or product: `{sub}`")
@@ -35,7 +35,7 @@ class Asp(Command):
             say("Usage: `asp <product> <asp_id> [args]`")
             return
         real_id = self.db.get_asp_user_id(asp_id)  # TODO
-        product = self.prislista._products[product_cmd]
+        product = self.products[product_cmd]
         product.execute(
             {"slack_id": user_ids["slack_id"], "db_id": real_id},
             product_args.strip(),
@@ -47,7 +47,7 @@ class Asp(Command):
             "`asp <subcommand>` hanterar aspar.\n"
             "Kör `asp <subcommand> help` för mer information.\n"
             f"{self._registry}\n" + 
-            ("\n").join(["`asp "+product.usage()+"`" for product in self.products])
+            ("\n").join(["- `asp "+product.usage()+"`" for product in self.products.values()])
         )
 
     def description(self):
