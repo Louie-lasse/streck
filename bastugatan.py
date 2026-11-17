@@ -157,6 +157,7 @@ def on_release(key):
 ### CLI FUNCTIONS ###
 
 user_command_registry = Command_registry()
+user_command_registry.add(Asp())
 user_command_registry.add(Avverkare())
 user_command_registry.add(Beer())
 user_command_registry.add(Cider())
@@ -172,7 +173,6 @@ user_command_registry.add(Prislista())
 
 admin_command_registry = Command_registry()
 admin_command_registry.add(Add(slack_client))
-admin_command_registry.add(Asp())
 admin_command_registry.add(Betala(slack_client))
 admin_command_registry.add(ChangePrice())
 admin_command_registry.add(Connect(slack_client))
