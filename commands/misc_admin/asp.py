@@ -8,7 +8,6 @@ from db_handler import DatabaseHandler
 class Asp(Command):
     def __init__(self):
         self.db = DatabaseHandler()
-        self.products = Prislista.get_products()
         self._registry = Command_registry()
         db = self.db
         for cmd in (AspList(db), AspAdd(db), AspRemove(db), AspSkuld(db), AspTom(db)):
@@ -24,7 +23,7 @@ class Asp(Command):
 
         if sub in self._registry: # predefined subcommands win over product names
             self._registry[sub].execute(user_ids, rest, say)
-        elif sub in self.products:
+        elif sub in Prislista.get_products():
             self._buy(user_ids, sub, rest, say)
         else:
             say(f"Unknown asp subcommand or product: `{sub}`")
@@ -35,7 +34,7 @@ class Asp(Command):
             say("Usage: `asp <product> <asp_id> [args]`")
             return
         real_id = self.db.get_asp_user_id(asp_id)  # TODO
-        product = self.products[product_cmd]
+        product = Prislista.get_products()[product_cmd]
         product.execute(
             {"slack_id": user_ids["slack_id"], "db_id": real_id},
             product_args.strip(),
@@ -47,7 +46,7 @@ class Asp(Command):
             "`asp <subcommand>` hanterar aspar.\n"
             "Kör `asp <subcommand> help` för mer information.\n"
             f"{self._registry}\n" + 
-            ("\n").join(["- `asp "+product.usage()+"`" for product in self.products.values()])
+            ("\n").join(["- `asp "+product.usage()+"`" for product in Prislista.get_products().values()])
         )
 
     def description(self):
